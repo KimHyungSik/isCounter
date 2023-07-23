@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:is_counter/database/prefs_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Sharedpreferences {
@@ -12,20 +13,20 @@ class Sharedpreferences {
     return _sharedpreferences;
   }
 
-  read(String key) async {
+  read(PREFS_KEY key) async {
     final prefs = await SharedPreferences.getInstance();
-    final value = prefs.getString(key);
+    final value = prefs.getString(key.name);
     if (value == null) return null;
     return json.decode(value);
   }
 
-  save(String key, value) async {
+  save(PREFS_KEY key, String value) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, json.encode(value));
+    prefs.setString(key.name, json.encode(value));
   }
 
-  remove(String key) async {
+  remove(PREFS_KEY key) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove(key);
+    prefs.remove(key.name);
   }
 }

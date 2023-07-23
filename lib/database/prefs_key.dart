@@ -1,0 +1,1 @@
+enum PREFS_KEY { COUNTER }
