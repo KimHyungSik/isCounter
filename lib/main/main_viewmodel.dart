@@ -17,6 +17,7 @@ class MainViewModel extends ChangeNotifier {
 
   Future getCounterList() async {
     final listJson = await _prefs.read(PREFS_KEY.COUNTER);
+    if (listJson == null) return;
     final jsonData = jsonDecode(listJson);
     _list = CounterList.fromJson(jsonData).list;
     notifyListeners();
