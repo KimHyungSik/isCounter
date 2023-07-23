@@ -7,7 +7,7 @@ class CounterList {
 
   Map<String, dynamic> toJson() {
     return {
-      'list': list.map((counter) => counter.toJson()).toList(),
+      "list": list.map((counter) => counter.toJson()).toList(),
     };
   }
 
