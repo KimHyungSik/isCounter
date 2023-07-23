@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:is_counter/database/model/counter_list.dart';
-import 'package:is_counter/database/prefs_key.dart';
-import 'package:is_counter/database/sharedpreferences.dart';
 
-import '../database/model/counter.dart';
+import '../database/model/counter/counter.dart';
+import '../database/model/counter/counter_list.dart';
+import '../database/prefs/prefs_key.dart';
+import '../database/prefs/sharedpreferences.dart';
 
 class MainViewModel extends ChangeNotifier {
   MainViewModel() {

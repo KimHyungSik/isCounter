@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:is_counter/database/model/counter_method.dart';
+import 'counter_method.dart';
 
 class Counter {
   String id;
