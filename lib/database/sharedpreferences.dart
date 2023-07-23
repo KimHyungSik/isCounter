@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:is_counter/database/prefs_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Sharedpreferences {
-  Sharedpreferences._privateConstructor();
+class Prefs {
+  Prefs._privateConstructor();
 
-  static final Sharedpreferences _sharedpreferences =
-      Sharedpreferences._privateConstructor();
+  static final Prefs _sharedpreferences = Prefs._privateConstructor();
 
-  factory Sharedpreferences() {
+  factory Prefs() {
     return _sharedpreferences;
   }
 
