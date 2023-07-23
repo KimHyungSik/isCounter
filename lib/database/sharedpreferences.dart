@@ -16,12 +16,12 @@ class Prefs {
     final prefs = await SharedPreferences.getInstance();
     final value = prefs.getString(key.name);
     if (value == null) return null;
-    return json.decode(value);
+    return value;
   }
 
-  save(PREFS_KEY key, String value) async {
+  save(PREFS_KEY key, dynamic value) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key.name, json.encode(value));
+    prefs.setString(key.name, jsonEncode(value));
   }
 
   remove(PREFS_KEY key) async {
