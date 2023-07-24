@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class AppBarBuilder {
   String? _title;
   Icon? _endIcon;
-  VoidCallback? _endIconAction;
+  Function()? _endIconAction;
   Icon? _endNav;
-  VoidCallback? _endNavAction;
+  Function()? _endNavAction;
 
   // Setters for various configurations
   AppBarBuilder setTitle(String title) {
@@ -13,13 +13,13 @@ class AppBarBuilder {
     return this;
   }
 
-  AppBarBuilder setEndIcon(Icon icon, VoidCallback action) {
+  AppBarBuilder setEndIcon(Icon icon, Function() action) {
     _endIcon = icon;
     _endIconAction = action;
     return this;
   }
 
-  AppBarBuilder setEndNav(Icon icon, VoidCallback action) {
+  AppBarBuilder setEndNav(Icon icon, Function() action) {
     _endNav = icon;
     _endNavAction = action;
     return this;
