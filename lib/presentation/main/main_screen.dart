@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import '../database/model/counter/counter.dart';
-import '../database/model/counter/counter_method.dart';
+import '../../database/model/counter/counter.dart';
+import '../../database/model/counter/counter_method.dart';
 import 'main_viewmodel.dart';
 
 class MyWidget extends StatelessWidget {
