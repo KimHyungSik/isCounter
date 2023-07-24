@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/model/counter/counter.dart';
@@ -20,8 +21,21 @@ class MyWidget extends StatelessWidget {
         counterMethod: Method.BUTTON);
     viewModel.setCounterList([counter]);
 
-    return Center(
-      child: Text(viewModel.list.isEmpty ? "isEmpty" : viewModel.list[0].title),
+    return Scaffold(
+      appBar: AppBarBuilder()
+          .setEndIcon(
+            const Icon(Icons.add),
+            () {},
+          )
+          .setEndNav(
+            const Icon(Icons.more_horiz),
+            () {},
+          )
+          .build(),
+      body: Center(
+        child:
+            Text(viewModel.list.isEmpty ? "isEmpty" : viewModel.list[0].title),
+      ),
     );
   }
 }
