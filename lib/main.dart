@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/main/main_viewmodel.dart';
+import 'package:is_counter/theme/colors.dart';
 import 'package:provider/provider.dart';
 
 import 'main/main_screen.dart';
@@ -17,9 +18,17 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (_) => MainViewModel())],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        theme: ThemeData.light().copyWith(
+          primaryColor: lightPrimaryColor,
+          scaffoldBackgroundColor: lightBackgroundColor,
+          dividerColor: lightDividerColor,
         ),
+        darkTheme: ThemeData.dark().copyWith(
+          primaryColor: darkPrimaryColor,
+          scaffoldBackgroundColor: darkBackgroundColor,
+          dividerColor: darkDividerColor,
+        ),
+        themeMode: ThemeMode.system,
         home: const Scaffold(
           body: MyWidget(),
         ),
