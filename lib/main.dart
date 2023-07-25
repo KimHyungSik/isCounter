@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:is_counter/presentation/main/main_viewmodel.dart';
 import 'package:is_counter/theme/colors.dart';
 import 'package:provider/provider.dart';
+
+import 'generated/l10n.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +37,16 @@ class MyApp extends StatelessWidget {
           dividerColor: darkDividerColor,
         ),
         themeMode: ThemeMode.system,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''),
+          Locale('ko', ''),
+        ],
         onGenerateRoute: route.controller,
         initialRoute: route.mainScreen,
       ),

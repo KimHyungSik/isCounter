@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
@@ -36,8 +37,16 @@ class MainScreen extends StatelessWidget {
           )
           .build(),
       body: Center(
-        child:
-            Text(viewModel.list.isEmpty ? "isEmpty" : viewModel.list[0].title),
+        child: Column(
+          children: [
+            Text(viewModel.list.isEmpty
+                ? Intl.message('title')
+                : viewModel.list[0].title),
+            Text(
+              Intl.message('title'),
+            ),
+          ],
+        ),
       ),
     );
   }
