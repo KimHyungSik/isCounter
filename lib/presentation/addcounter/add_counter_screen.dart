@@ -34,6 +34,7 @@ class AddCounterScreen extends StatelessWidget {
             onSubmitted: (value) {
               FocusScope.of(context).requestFocus(fieldIncreaseValue);
             },
+            keyboardType: TextInputType.number,
           ),
           TextField(
             focusNode: fieldIncreaseValue,
@@ -41,6 +42,7 @@ class AddCounterScreen extends StatelessWidget {
               border: const OutlineInputBorder(),
               hintText: string(Localize.addCounterIncreaseValue),
             ),
+            keyboardType: TextInputType.number,
           ),
         ],
       ),
