@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:is_counter/common/localization.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 
 class AddCounterScreen extends StatelessWidget {
@@ -8,7 +9,13 @@ class AddCounterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarBuilder().build(),
-      body: const Column(children: []),
+      body: Column(
+        children: [
+          Text(
+            string(Localize.addCounterTitle),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -50,11 +50,71 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Test!`
-  String get title {
+  /// `카운터 명`
+  String get add_counter_title {
     return Intl.message(
-      'Test!',
-      name: 'title',
+      '카운터 명',
+      name: 'add_counter_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `카운터 색상`
+  String get add_counter_color_text {
+    return Intl.message(
+      '카운터 색상',
+      name: 'add_counter_color_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `시작 값`
+  String get add_counter_start_point {
+    return Intl.message(
+      '시작 값',
+      name: 'add_counter_start_point',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `증가 값`
+  String get add_counter_increase_value {
+    return Intl.message(
+      '증가 값',
+      name: 'add_counter_increase_value',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `카운터 방법`
+  String get add_counter_method {
+    return Intl.message(
+      '카운터 방법',
+      name: 'add_counter_method',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `버튼 방식`
+  String get add_counter_button_method {
+    return Intl.message(
+      '버튼 방식',
+      name: 'add_counter_button_method',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `화면 터치 방식`
+  String get add_counter_screen_method {
+    return Intl.message(
+      '화면 터치 방식',
+      name: 'add_counter_screen_method',
       desc: '',
       args: [],
     );
