@@ -43,6 +43,14 @@ class AddCounterScreen extends StatelessWidget {
               hintText: string(Localize.addCounterIncreaseValue),
             ),
             keyboardType: TextInputType.number,
+            onSubmitted: (value) {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return Container();
+                },
+              );
+            },
           ),
         ],
       ),
