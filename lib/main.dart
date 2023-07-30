@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:is_counter/presentation/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:is_counter/presentation/main/main_viewmodel.dart';
 import 'package:is_counter/theme/colors.dart';
@@ -17,7 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => MainViewModel())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => MainViewModel()),
+        ChangeNotifierProvider(create: (_) => AddCounterViewModel()),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.light().copyWith(
