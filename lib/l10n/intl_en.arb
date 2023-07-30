@@ -5,5 +5,6 @@
     "add_counter_increase_value" : "증가 값",
     "add_counter_method" : "카운터 방법",
     "add_counter_button_method" : "버튼 방식",
-    "add_counter_screen_method" : "화면 터치 방식"
+    "add_counter_screen_method" : "화면 터치 방식",
+    "bottom_sheet_confirm" : "완료"
 }

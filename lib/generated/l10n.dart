@@ -119,6 +119,16 @@ class S {
       args: [],
     );
   }
+
+  /// `완료`
+  String get bottom_sheet_confirm {
+    return Intl.message(
+      '완료',
+      name: 'bottom_sheet_confirm',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
