@@ -71,10 +71,12 @@ class AddCounterScreen extends StatelessWidget {
         return StatefulBuilder(
           builder: (BuildContext conetxt, StateSetter setState) {
             return Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  string(Localize.bottomSheetConfirm),
+                const SizedBox(
+                  height: 24,
                 ),
                 ColorPicker(
                   selected: viewModel.selectedColor,
@@ -83,6 +85,15 @@ class AddCounterScreen extends StatelessWidget {
                       viewModel.selectColor(select);
                     });
                   },
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    string(Localize.bottomSheetConfirm),
+                  ),
+                ),
+                const SizedBox(
+                  height: 32,
                 )
               ],
             );
