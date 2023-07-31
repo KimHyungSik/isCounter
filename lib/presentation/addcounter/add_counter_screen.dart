@@ -100,7 +100,9 @@ class AddCounterScreen extends StatelessWidget {
                   },
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     string(Localize.bottomSheetConfirm),
                   ),
