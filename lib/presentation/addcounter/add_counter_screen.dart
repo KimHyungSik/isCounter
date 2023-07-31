@@ -21,16 +21,21 @@ class AddCounterScreen extends StatelessWidget {
       body: Column(
         children: [
           TextField(
+            controller: TextEditingController(text: viewModel.title),
             focusNode: fieldTitle,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: string(Localize.addCounterTitle),
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
             ),
             onSubmitted: (value) {
               FocusScope.of(context).requestFocus(fieldStartPoint);
             },
+            onChanged: (value) {
+              viewModel.setTitle(value);
+            },
           ),
           TextField(
+            controller:
+                TextEditingController(text: viewModel.startValue.toString()),
             focusNode: fieldStartPoint,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
@@ -39,18 +44,26 @@ class AddCounterScreen extends StatelessWidget {
             onSubmitted: (value) {
               FocusScope.of(context).requestFocus(fieldIncreaseValue);
             },
+            onChanged: (value) {
+              viewModel.setStartValue(int.parse(value));
+            },
             keyboardType: TextInputType.number,
           ),
           TextField(
+            controller: TextEditingController(
+                text: viewModel.incrementValue.toString()),
             focusNode: fieldIncreaseValue,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               hintText: string(Localize.addCounterIncreaseValue),
             ),
-            keyboardType: TextInputType.number,
             onSubmitted: (value) {
               showColorPickerBottomSheet(context, viewModel);
             },
+            onChanged: (value) {
+              viewModel.setIncrementValue(int.parse(value));
+            },
+            keyboardType: TextInputType.number,
           ),
           ColorPicker(
             selected: viewModel.selectedColor,
