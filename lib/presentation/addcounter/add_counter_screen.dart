@@ -47,25 +47,7 @@ class AddCounterScreen extends StatelessWidget {
             ),
             keyboardType: TextInputType.number,
             onSubmitted: (value) {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        string(Localize.bottomSheetConfirm),
-                      ),
-                      ColorPicker(
-                        selected: viewModel.selectedColor,
-                        click: (select) {
-                          viewModel.selectColor(select);
-                        },
-                      )
-                    ],
-                  );
-                },
-              );
+              showColorPickerBottomSheet(context, viewModel);
             },
           ),
           ColorPicker(
@@ -76,6 +58,35 @@ class AddCounterScreen extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Future<dynamic> showColorPickerBottomSheet(
+      BuildContext context, AddCounterViewModel viewModel) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext conetxt, StateSetter setState) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  string(Localize.bottomSheetConfirm),
+                ),
+                ColorPicker(
+                  selected: viewModel.selectedColor,
+                  click: (select) {
+                    setState(() {
+                      viewModel.selectColor(select);
+                    });
+                  },
+                )
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }
