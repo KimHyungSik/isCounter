@@ -70,6 +70,13 @@ class AddCounterScreen extends StatelessWidget {
             click: (select) {
               viewModel.selectColor(select);
             },
+          ),
+          const Spacer(
+            flex: 1,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text("저장하기"),
           )
         ],
       ),
@@ -103,8 +110,12 @@ class AddCounterScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(
-                    string(Localize.bottomSheetConfirm),
+                  child: Container(
+                    width: double.infinity,
+                    color: Theme.of(context).colorScheme.primary,
+                    child: Text(
+                      string(Localize.bottomSheetConfirm),
+                    ),
                   ),
                 ),
                 const SizedBox(
