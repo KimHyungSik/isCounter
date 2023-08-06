@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:is_counter/database/controller/counter_controller.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../database/model/counter/counter.dart';
+import '../../database/model/counter/counter_method.dart';
 
 class AddCounterViewModel extends ChangeNotifier {
+  CounterController _counterController = CounterController();
+
   String _title = "카운터";
   String get title => _title;
 
@@ -31,5 +38,17 @@ class AddCounterViewModel extends ChangeNotifier {
   void setStartValue(int startValue) {
     _startValue = startValue;
     notifyListeners();
+  }
+
+  void saveCounter() {
+    Counter counter = Counter(
+        id: const Uuid().v4(),
+        title: title,
+        color: selectedColor,
+        startValue: startValue,
+        incrementValue: incrementValue,
+        counterMethod: Method.BUTTON);
+
+    _counterController.modifyCounter(null, counter);
   }
 }

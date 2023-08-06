@@ -5,7 +5,7 @@ import 'counter_method.dart';
 class Counter {
   String id;
   String title;
-  String color;
+  int color;
   int startValue;
   int incrementValue;
   Method counterMethod;
