@@ -40,6 +40,24 @@ class CounterController {
     return await setCounterList(counterList);
   }
 
+  Future<bool> addCounter(
+    CounterList? cacheCounterList,
+    Counter counter,
+  ) async {
+    CounterList counterList = await _checkCacheCounterList(cacheCounterList);
+
+    int targetIndex =
+        counterList.list.indexWhere((element) => element.id == counter.id);
+
+    if (targetIndex != -1) {
+      return false;
+    } else {
+      counterList.list.add(counter);
+    }
+    await setCounterList(counterList);
+    return true;
+  }
+
   Future<CounterList> removeCounter(
     CounterList? cacheCounterList,
     Counter counter,
