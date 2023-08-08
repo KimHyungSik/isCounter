@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
     final counter = Counter(
         id: "1",
         title: "title",
-        color: "color",
+        color: 1,
         startValue: 0,
         incrementValue: 1,
         counterMethod: Method.BUTTON);
