@@ -83,7 +83,15 @@ class AddCounterScreen extends StatelessWidget {
             flex: 1,
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              viewModel.saveCounter().then(
+                (value) {
+                  if (value) {
+                    Navigator.pop(context);
+                  }
+                },
+              );
+            },
             child: Text("저장하기"),
           )
         ],

@@ -48,7 +48,7 @@ class AddCounterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveCounter() {
+  Future<bool> saveCounter() async {
     Counter counter = Counter(
         id: const Uuid().v4(),
         title: title,
@@ -57,6 +57,6 @@ class AddCounterViewModel extends ChangeNotifier {
         incrementValue: incrementValue,
         counterMethod: Method.BUTTON);
 
-    _counterController.modifyCounter(null, counter);
+    return await _counterController.addCounter(null, counter);
   }
 }
