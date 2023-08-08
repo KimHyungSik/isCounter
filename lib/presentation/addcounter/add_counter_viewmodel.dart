@@ -20,6 +20,9 @@ class AddCounterViewModel extends ChangeNotifier {
   int _selectedColor = 0;
   int get selectedColor => _selectedColor;
 
+  Method _method = Method.BUTTON;
+  Method get method => _method;
+
   void selectColor(int select) {
     _selectedColor = select;
     notifyListeners();
@@ -37,6 +40,11 @@ class AddCounterViewModel extends ChangeNotifier {
 
   void setStartValue(int startValue) {
     _startValue = startValue;
+    notifyListeners();
+  }
+
+  void setMethodValue(Method method) {
+    _method = method;
     notifyListeners();
   }
 

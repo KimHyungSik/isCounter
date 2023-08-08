@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/common/localization.dart';
+import 'package:is_counter/database/model/counter/counter_method.dart';
 import 'package:is_counter/presentation/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
+import 'package:is_counter/presentation/common/method_radio.dart';
 import 'package:provider/provider.dart';
 
 import '../common/color_picker.dart';
@@ -71,6 +73,12 @@ class AddCounterScreen extends StatelessWidget {
               viewModel.selectColor(select);
             },
           ),
+          MethodRaido(
+            selected: viewModel.method,
+            onCHanged: (change) {
+              viewModel.setMethodValue(change);
+            },
+          ),
           const Spacer(
             flex: 1,
           ),
@@ -84,7 +92,9 @@ class AddCounterScreen extends StatelessWidget {
   }
 
   Future<dynamic> showColorPickerBottomSheet(
-      BuildContext context, AddCounterViewModel viewModel) {
+    BuildContext context,
+    AddCounterViewModel viewModel,
+  ) {
     return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -106,21 +116,67 @@ class AddCounterScreen extends StatelessWidget {
                     });
                   },
                 ),
-                TextButton(
-                  onPressed: () {
+                bottomSheetConfrimButton(
+                  context = context,
+                  () {
                     Navigator.pop(context);
+                    showMethodBottomSheet(context, viewModel);
                   },
-                  child: Container(
-                    width: double.infinity,
-                    color: Theme.of(context).colorScheme.primary,
-                    child: Text(
-                      string(Localize.bottomSheetConfirm),
-                    ),
-                  ),
                 ),
                 const SizedBox(
                   height: 32,
                 )
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  TextButton bottomSheetConfrimButton(
+    BuildContext context,
+    void Function() onPressed,
+  ) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Container(
+        width: double.infinity,
+        color: Theme.of(context).colorScheme.primary,
+        child: Text(
+          string(Localize.bottomSheetConfirm),
+        ),
+      ),
+    );
+  }
+
+  Future<dynamic> showMethodBottomSheet(
+      BuildContext context, AddCounterViewModel viewModel) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext conetxt, StateSetter setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                MethodRaido(
+                  selected: viewModel.method,
+                  onCHanged: (change) {
+                    viewModel.setMethodValue(change);
+                  },
+                ),
+                bottomSheetConfrimButton(
+                  context = context,
+                  () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
               ],
             );
           },
