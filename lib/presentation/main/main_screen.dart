@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 
-import '../../database/model/counter/counter.dart';
-import '../../database/model/counter/counter_method.dart';
 import 'main_viewmodel.dart';
 
 class MainScreen extends StatelessWidget {
@@ -14,15 +11,6 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainViewModel viewModel = Provider.of<MainViewModel>(context);
-    final counter = Counter(
-        id: "1",
-        title: "title",
-        color: 1,
-        startValue: 0,
-        incrementValue: 1,
-        counterMethod: Method.BUTTON);
-    viewModel.setCounterList([counter]);
-
     return Scaffold(
       appBar: AppBarBuilder()
           .setEndIcon(
@@ -36,17 +24,12 @@ class MainScreen extends StatelessWidget {
             () {},
           )
           .build(),
-      body: Center(
-        child: Column(
-          children: [
-            Text(viewModel.list.isEmpty
-                ? Intl.message('title')
-                : viewModel.list[0].title),
-            Text(
-              Intl.message('title'),
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: viewModel.counterList.list.length,
+        itemBuilder: ((context, index) {
+          final counter = viewModel.counterList.list[index];
+          return Text(counter.title);
+        }),
       ),
     );
   }
