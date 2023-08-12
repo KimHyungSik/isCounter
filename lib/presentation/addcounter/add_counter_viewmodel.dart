@@ -53,6 +53,7 @@ class AddCounterViewModel extends ChangeNotifier {
         id: const Uuid().v4(),
         title: title,
         color: selectedColor,
+        value: startValue,
         startValue: startValue,
         incrementValue: incrementValue,
         counterMethod: Method.BUTTON);
