@@ -4,6 +4,7 @@ import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 
+import '../addcounter/add_counter_screen.dart';
 import '../common/color_picker.dart';
 import 'main_viewmodel.dart';
 
@@ -18,7 +19,12 @@ class MainScreen extends StatelessWidget {
           .setEndIcon(
             const Icon(Icons.add),
             () {
-              Navigator.pushNamed(context, route.addScreen);
+              Navigator.pushNamed(
+                context,
+                route.addScreen,
+                arguments:
+                    AddCounterArgs(viewModel.counterList.list.length + 1),
+              ).then((_) => viewModel.getCounterList());
             },
           )
           .setEndNav(

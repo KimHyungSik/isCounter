@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:is_counter/presentation/addcounter/add_counter_screen.dart';
 import 'package:is_counter/presentation/main/main_screen.dart';
@@ -11,7 +10,17 @@ Route<dynamic> controller(RouteSettings settings) {
     case mainScreen:
       return MaterialPageRoute(builder: (context) => const MainScreen());
     case addScreen:
-      return MaterialPageRoute(builder: (context) => AddCounterScreen());
+      {
+        final arg = settings.arguments;
+        if (arg is AddCounterArgs) {
+          return MaterialPageRoute(
+              builder: (context) => AddCounterScreen(addCounterArgs: arg));
+        } else {
+          return MaterialPageRoute(
+              builder: (context) =>
+                  AddCounterScreen(addCounterArgs: AddCounterArgs(null)));
+        }
+      }
     default:
       throw ('This route name does not exit');
   }
