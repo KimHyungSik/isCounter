@@ -5,6 +5,7 @@ import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/common/method_radio.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/model/counter/counter_method.dart';
 import '../common/color_picker.dart';
 
 class AddCounterScreen extends StatelessWidget {
@@ -18,76 +19,24 @@ class AddCounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddCounterViewModel viewModel = Provider.of<AddCounterViewModel>(context);
-    viewModel
-        .setTitle(viewModel.title + addCounterArgs.titleCounter.toString());
+    context
+        .read<AddCounterViewModel>()
+        .addTitleTail(addCounterArgs.titleCounter.toString());
     return Scaffold(
       appBar: AppBarBuilder().build(),
       body: Column(
         children: [
-          TextField(
-            controller: TextEditingController(text: viewModel.title),
-            focusNode: fieldTitle,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-            onSubmitted: (value) {
-              FocusScope.of(context).requestFocus(fieldStartPoint);
-            },
-            onChanged: (value) {
-              viewModel.setTitle(value);
-            },
-          ),
-          TextField(
-            controller:
-                TextEditingController(text: viewModel.startValue.toString()),
-            focusNode: fieldStartPoint,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: string(Localize.addCounterStartPoint),
-            ),
-            onSubmitted: (value) {
-              FocusScope.of(context).requestFocus(fieldIncreaseValue);
-            },
-            onChanged: (value) {
-              viewModel.setStartValue(int.parse(value));
-            },
-            keyboardType: TextInputType.number,
-          ),
-          TextField(
-            controller: TextEditingController(
-                text: viewModel.incrementValue.toString()),
-            focusNode: fieldIncreaseValue,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: string(Localize.addCounterIncreaseValue),
-            ),
-            onSubmitted: (value) {
-              showColorPickerBottomSheet(context, viewModel);
-            },
-            onChanged: (value) {
-              viewModel.setIncrementValue(int.parse(value));
-            },
-            keyboardType: TextInputType.number,
-          ),
-          ColorPicker(
-            selected: viewModel.selectedColor,
-            click: (select) {
-              viewModel.selectColor(select);
-            },
-          ),
-          MethodRaido(
-            selected: viewModel.method,
-            onCHanged: (change) {
-              viewModel.setMethodValue(change);
-            },
-          ),
+          titleTextField(context),
+          startValueTextField(context),
+          incrementValueField(context),
+          selectedColor(),
+          selectedMethod(),
           const Spacer(
             flex: 1,
           ),
           TextButton(
             onPressed: () {
-              viewModel.saveCounter().then(
+              context.read<AddCounterViewModel>().saveCounter().then(
                 (value) {
                   if (value) {
                     Navigator.pop(context);
@@ -102,9 +51,92 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
+  Selector<AddCounterViewModel, Method> selectedMethod() {
+    return Selector<AddCounterViewModel, Method>(
+      selector: (context, viewModel) => viewModel.method,
+      builder: (context, method, child) {
+        return MethodRaido(
+          selected: method,
+          onCHanged: (change) {
+            context.read<AddCounterViewModel>().setMethodValue(change);
+          },
+        );
+      },
+    );
+  }
+
+  TextField incrementValueField(BuildContext context) {
+    final viewModel = context.read<AddCounterViewModel>();
+    return TextField(
+      controller:
+          TextEditingController(text: viewModel.incrementValue.toString()),
+      focusNode: fieldIncreaseValue,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: string(Localize.addCounterIncreaseValue),
+      ),
+      onSubmitted: (value) {
+        showColorPickerBottomSheet(context);
+      },
+      onChanged: (value) {
+        viewModel.setIncrementValue(int.parse(value));
+      },
+      keyboardType: TextInputType.number,
+    );
+  }
+
+  Selector<AddCounterViewModel, int> selectedColor() {
+    return Selector<AddCounterViewModel, int>(
+      selector: (context, viewModel) => viewModel.selectedColor,
+      builder: (context, selectedColor, child) {
+        return ColorPicker(
+          selected: selectedColor,
+          click: (select) {
+            context.read<AddCounterViewModel>().selectColor(select);
+          },
+        );
+      },
+    );
+  }
+
+  TextField startValueTextField(BuildContext context) {
+    final viewModel = context.read<AddCounterViewModel>();
+    return TextField(
+      controller: TextEditingController(text: viewModel.startValue.toString()),
+      focusNode: fieldStartPoint,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: string(Localize.addCounterStartPoint),
+      ),
+      onSubmitted: (value) {
+        FocusScope.of(context).requestFocus(fieldIncreaseValue);
+      },
+      onChanged: (value) {
+        viewModel.setStartValue(int.parse(value));
+      },
+      keyboardType: TextInputType.number,
+    );
+  }
+
+  TextField titleTextField(BuildContext context) {
+    final viewModel = context.read<AddCounterViewModel>();
+    return TextField(
+      controller: TextEditingController(text: viewModel.title),
+      focusNode: fieldTitle,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+      ),
+      onSubmitted: (value) {
+        FocusScope.of(context).requestFocus(fieldStartPoint);
+      },
+      onChanged: (value) {
+        viewModel.setTitle(value);
+      },
+    );
+  }
+
   Future<dynamic> showColorPickerBottomSheet(
     BuildContext context,
-    AddCounterViewModel viewModel,
   ) {
     return showModalBottomSheet(
       context: context,
@@ -119,19 +151,12 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                ColorPicker(
-                  selected: viewModel.selectedColor,
-                  click: (select) {
-                    setState(() {
-                      viewModel.selectColor(select);
-                    });
-                  },
-                ),
+                selectedColor(),
                 bottomSheetConfrimButton(
                   context = context,
                   () {
                     Navigator.pop(context);
-                    showMethodBottomSheet(context, viewModel);
+                    showMethodBottomSheet(context);
                   },
                 ),
                 const SizedBox(
@@ -162,7 +187,8 @@ class AddCounterScreen extends StatelessWidget {
   }
 
   Future<dynamic> showMethodBottomSheet(
-      BuildContext context, AddCounterViewModel viewModel) {
+    BuildContext context,
+  ) {
     return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -173,12 +199,7 @@ class AddCounterScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                MethodRaido(
-                  selected: viewModel.method,
-                  onCHanged: (change) {
-                    viewModel.setMethodValue(change);
-                  },
-                ),
+                selectedMethod(),
                 bottomSheetConfrimButton(
                   context = context,
                   () {

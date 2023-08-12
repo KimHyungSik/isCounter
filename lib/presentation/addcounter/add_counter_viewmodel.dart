@@ -33,6 +33,11 @@ class AddCounterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addTitleTail(String tail) {
+    _title = title + tail;
+    notifyListeners();
+  }
+
   void setIncrementValue(int incrementValue) {
     _incrementValue = incrementValue;
     notifyListeners();
