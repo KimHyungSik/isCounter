@@ -33,7 +33,6 @@ class Counter {
     };
   }
 
-  // fromJson 메서드: JSON 형식의 Map을 Counter 객체로 변환
   factory Counter.fromJson(Map<String, dynamic> json) {
     return Counter(
       id: json['id'],
