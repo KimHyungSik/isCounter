@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/presentation/addcounter/add_counter_screen.dart';
+import 'package:is_counter/presentation/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/main/main_screen.dart';
+import 'package:provider/provider.dart';
 
 const String mainScreen = 'main';
 const String addScreen = 'add';
@@ -12,14 +14,10 @@ Route<dynamic> controller(RouteSettings settings) {
     case addScreen:
       {
         final arg = settings.arguments;
-        if (arg is AddCounterArgs) {
-          return MaterialPageRoute(
-              builder: (context) => AddCounterScreen(addCounterArgs: arg));
-        } else {
-          return MaterialPageRoute(
-              builder: (context) =>
-                  AddCounterScreen(addCounterArgs: AddCounterArgs(null)));
-        }
+        final screen = arg is AddCounterArgs
+            ? AddCounterScreen(addCounterArgs: arg)
+            : AddCounterScreen(addCounterArgs: AddCounterArgs(null));
+        return MaterialPageRoute(builder: (context) => screen);
       }
     default:
       throw ('This route name does not exit');
