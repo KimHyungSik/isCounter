@@ -36,7 +36,11 @@ class MainScreen extends StatelessWidget {
         itemCount: viewModel.counterList.list.length,
         itemBuilder: ((context, index) {
           final counter = viewModel.counterList.list[index];
-          return NumberListItem(counter: counter);
+          return NumberListItem(
+            counter: counter,
+            incrementValue: () => viewModel.incrementValue(counter),
+            decrementValue: () => viewModel.decrementValue(counter),
+          );
         }),
       ),
     );
@@ -45,8 +49,15 @@ class MainScreen extends StatelessWidget {
 
 class NumberListItem extends StatelessWidget {
   final Counter counter;
+  Function() incrementValue;
+  Function() decrementValue;
 
-  const NumberListItem({super.key, required this.counter});
+  NumberListItem({
+    super.key,
+    required this.counter,
+    required this.incrementValue,
+    required this.decrementValue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,22 +78,18 @@ class NumberListItem extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.add),
-                    onPressed: () {
-                      // 버튼을 누를 때 동작
-                    },
+                    icon: const Icon(Icons.remove),
+                    onPressed: () => decrementValue(),
                   ),
                   const Spacer(),
                   Text(
                     counter.value.toString(),
                     style: const TextStyle(fontSize: 18),
                   ),
-                  const Spacer(), // 나머지 공간 차지
+                  const Spacer(),
                   IconButton(
-                    icon: const Icon(Icons.remove),
-                    onPressed: () {
-                      // 버튼을 누를 때 동작
-                    },
+                    icon: const Icon(Icons.add),
+                    onPressed: () => incrementValue(),
                   ),
                 ],
               ),
