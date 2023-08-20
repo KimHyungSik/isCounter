@@ -50,11 +50,21 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `카운터 명`
+  /// `카운터`
   String get add_counter_title {
     return Intl.message(
-      '카운터 명',
+      '카운터',
       name: 'add_counter_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `카운터 명`
+  String get add_counter_title_description {
+    return Intl.message(
+      '카운터 명',
+      name: 'add_counter_title_description',
       desc: '',
       args: [],
     );
@@ -125,6 +135,16 @@ class S {
     return Intl.message(
       '완료',
       name: 'bottom_sheet_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `저장하기`
+  String get save {
+    return Intl.message(
+      '저장하기',
+      name: 'save',
       desc: '',
       args: [],
     );
