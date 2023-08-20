@@ -13,7 +13,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MainViewModel viewModel = Provider.of<MainViewModel>(context);
     return Scaffold(
       appBar: AppBarBuilder()
           .setEndIcon(
@@ -22,9 +21,9 @@ class MainScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 route.addScreen,
-                arguments:
-                    AddCounterArgs(viewModel.counterList.list.length + 1),
-              ).then((_) => viewModel.getCounterList());
+                arguments: AddCounterArgs(
+                    context.read<MainViewModel>().counterList.list.length + 1),
+              ).then((_) => context.read<MainViewModel>().getCounterList());
             },
           )
           .setEndNav(
@@ -32,16 +31,22 @@ class MainScreen extends StatelessWidget {
             () {},
           )
           .build(),
-      body: ListView.builder(
-        itemCount: viewModel.counterList.list.length,
-        itemBuilder: ((context, index) {
-          final counter = viewModel.counterList.list[index];
-          return NumberListItem(
-            counter: counter,
-            incrementValue: () => viewModel.incrementValue(counter),
-            decrementValue: () => viewModel.decrementValue(counter),
+      body: Selector<MainViewModel, MainViewModelState>(
+        selector: (context, viewModel) => viewModel.state,
+        builder: (context, _, child) {
+          final viewModel = context.read<MainViewModel>();
+          return ListView.builder(
+            itemCount: viewModel.counterList.list.length,
+            itemBuilder: ((context, index) {
+              final counter = viewModel.counterList.list[index];
+              return NumberListItem(
+                counter: counter,
+                incrementValue: () => viewModel.incrementValue(counter),
+                decrementValue: () => viewModel.decrementValue(counter),
+              );
+            }),
           );
-        }),
+        },
       ),
     );
   }
@@ -61,6 +66,7 @@ class NumberListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("build : ${counter.id}");
     return ListTile(
       title: Card(
         shape: RoundedRectangleBorder(
@@ -82,9 +88,11 @@ class NumberListItem extends StatelessWidget {
                     onPressed: () => decrementValue(),
                   ),
                   const Spacer(),
-                  Text(
-                    counter.value.toString(),
-                    style: const TextStyle(fontSize: 18),
+                  Consumer<MainViewModel>(
+                    builder: (context, viewModel, _) => Text(
+                      viewModel.getCounter(counter.id).value.toString(),
+                      style: const TextStyle(fontSize: 18),
+                    ),
                   ),
                   const Spacer(),
                   IconButton(

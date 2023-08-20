@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import '../../database/controller/counter_controller.dart';
@@ -8,15 +10,22 @@ class MainViewModel extends ChangeNotifier {
   CounterList _counterList = CounterList();
   CounterList get counterList => _counterList;
   final CounterController _counterController = CounterController();
+  MainViewModelState state = MainViewModelState.INIT;
 
   MainViewModel() {
     getCounterList();
-    print("create MainViewModel");
   }
 
+  Counter getCounter(String id) =>
+      counterList.list.firstWhere((element) => element.id == id);
+
   Future getCounterList() async {
+    state = MainViewModelState.LOADING;
+    notifyListeners();
+
     final counterList = await _counterController.getCounterList();
     _counterList = counterList;
+    state = MainViewModelState.REFRESH;
     notifyListeners();
   }
 
@@ -34,3 +43,5 @@ class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+enum MainViewModelState { INIT, REFRESH, MODIFY, LOADING }
