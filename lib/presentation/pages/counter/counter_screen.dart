@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
+import 'package:is_counter/presentation/common/color_picker.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -8,15 +9,22 @@ class CounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarBuilder().setTitle("title").build(),
-      body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: GestureDetector(
-          onTap: () {
-            context.read<CounterViewModel>().incrementValue();
-          },
+    final counterColor =
+        counterColors[context.read<CounterViewModel>().counter.color];
+    return GestureDetector(
+      onTap: () {
+        context.read<CounterViewModel>().incrementValue();
+      },
+      child: Scaffold(
+        appBar: AppBarBuilder()
+            .removeElevation()
+            .setColor(counterColor)
+            .setTitle("title")
+            .build(),
+        body: Container(
+          color: counterColor,
+          width: double.infinity,
+          height: double.infinity,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +33,13 @@ class CounterScreen extends StatelessWidget {
               Selector<CounterViewModel, String>(
                 selector: (context, viewModel) => viewModel.value,
                 builder: (context, value, _) {
-                  return Text(value);
+                  return Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 56,
+                      color: Colors.white,
+                    ),
+                  );
                 },
               ),
             ],

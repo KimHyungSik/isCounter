@@ -4,7 +4,8 @@ import 'package:is_counter/database/model/counter/counter.dart';
 
 class CounterViewModel extends ChangeNotifier {
   final CounterController _counterController = CounterController();
-  Counter _counter;
+  final Counter _counter;
+  Counter get counter => _counter;
   String get value => _counter.value.toString();
 
   CounterViewModel(this._counter);
