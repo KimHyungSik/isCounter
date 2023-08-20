@@ -18,33 +18,85 @@ class AddCounterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBarBuilder().build(),
-      body: Column(
-        children: [
-          titleTextField(context),
-          startValueTextField(context),
-          incrementValueField(context),
-          selectedColor(),
-          selectedMethod(),
-          const Spacer(
-            flex: 1,
-          ),
-          TextButton(
-            onPressed: () {
-              context.read<AddCounterViewModel>().saveCounter().then(
-                (value) {
-                  if (value) {
-                    Navigator.pop(context);
-                  }
-                },
-              );
-            },
-            child: Text(
-              string(Localize.save),
+      body: LayoutBuilder(builder: (context, constraint) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraint.maxHeight),
+            child: IntrinsicHeight(
+              child: Column(
+                children: [
+                  paddedColumn(context),
+                  selectedMethod(),
+                  const Spacer(),
+                  saveButton(context)
+                ],
+              ),
             ),
-          )
+          ),
+        );
+      }),
+    );
+  }
+
+  TextButton saveButton(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        context.read<AddCounterViewModel>().saveCounter().then(
+          (value) {
+            if (value) {
+              Navigator.pop(context);
+            }
+          },
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: Text(
+          string(Localize.save),
+        ),
+      ),
+    );
+  }
+
+  Padding paddedColumn(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ItemDescription(
+            string(Localize.addCounterTitle),
+          ),
+          titleTextField(context),
+          ItemDescription(
+            string(Localize.addCounterStartPoint),
+          ),
+          startValueTextField(context),
+          ItemDescription(
+            string(Localize.addCounterIncreaseValue),
+          ),
+          incrementValueField(context),
+          ItemDescription(
+            string(Localize.addCounterColorText),
+          ),
+          selectedColor(),
+          ItemDescription(
+            string(Localize.addCounterButtonMethod),
+          ),
         ],
       ),
+    );
+  }
+
+  Widget ItemDescription(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Text(text),
     );
   }
 
