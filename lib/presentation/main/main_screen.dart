@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
+import 'package:is_counter/presentation/main/state/main_state.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 
@@ -31,8 +32,11 @@ class MainScreen extends StatelessWidget {
             () {},
           )
           .build(),
-      body: Selector<MainViewModel, MainViewModelState>(
-        selector: (context, viewModel) => viewModel.state,
+      body: Selector<MainViewModel, MainState>(
+        selector: (context, viewModel) {
+          print("${viewModel.state}");
+          return viewModel.state;
+        },
         builder: (context, _, child) {
           final viewModel = context.read<MainViewModel>();
           return ListView.builder(
@@ -66,7 +70,6 @@ class NumberListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("build : ${counter.id}");
     return ListTile(
       title: Card(
         shape: RoundedRectangleBorder(

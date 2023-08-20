@@ -1,16 +1,16 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:is_counter/presentation/main/state/main_state.dart';
 
 import '../../database/controller/counter_controller.dart';
 import '../../database/model/counter/counter.dart';
 import '../../database/model/counter/counter_list.dart';
 
 class MainViewModel extends ChangeNotifier {
-  CounterList _counterList = CounterList();
-  CounterList get counterList => _counterList;
+  CounterList get counterList => state.counterList;
   final CounterController _counterController = CounterController();
-  MainViewModelState state = MainViewModelState.INIT;
+  MainState state = LoadingState();
 
   MainViewModel() {
     getCounterList();
@@ -20,12 +20,8 @@ class MainViewModel extends ChangeNotifier {
       counterList.list.firstWhere((element) => element.id == id);
 
   Future getCounterList() async {
-    state = MainViewModelState.LOADING;
-    notifyListeners();
-
     final counterList = await _counterController.getCounterList();
-    _counterList = counterList;
-    state = MainViewModelState.REFRESH;
+    state = LoadedState(counterList);
     notifyListeners();
   }
 
@@ -43,5 +39,3 @@ class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-enum MainViewModelState { INIT, REFRESH, MODIFY, LOADING }
