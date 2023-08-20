@@ -1,11 +1,10 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:is_counter/database/controller/counter_controller.dart';
+import 'package:is_counter/database/model/counter/counter.dart';
+import 'package:is_counter/database/model/counter/counter_list.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
-
-import '../../../database/controller/counter_controller.dart';
-import '../../../database/model/counter/counter.dart';
-import '../../../database/model/counter/counter_list.dart';
 
 class MainViewModel extends ChangeNotifier {
   CounterList get counterList => state.counterList;
