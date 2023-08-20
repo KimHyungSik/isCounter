@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:is_counter/presentation/addcounter/add_counter_screen.dart';
-import 'package:is_counter/presentation/addcounter/add_counter_viewmodel.dart';
-import 'package:is_counter/presentation/main/main_screen.dart';
+import 'package:is_counter/presentation/pages/addcounter/add_counter_screen.dart';
+import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
+import 'package:is_counter/presentation/pages/main/main_screen.dart';
 import 'package:provider/provider.dart';
 
 const String mainScreen = 'main';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/database/controller/counter_controller.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../database/model/counter/counter.dart';
-import '../../database/model/counter/counter_method.dart';
+import '../../../database/model/counter/counter.dart';
+import '../../../database/model/counter/counter_method.dart';
 
 class AddCounterViewModel extends ChangeNotifier {
   CounterController _counterController = CounterController();

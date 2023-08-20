@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/common/localization.dart';
-import 'package:is_counter/presentation/addcounter/add_counter_viewmodel.dart';
+import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/common/method_radio.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/model/counter/counter_method.dart';
-import '../common/color_picker.dart';
+import '../../../database/model/counter/counter_method.dart';
+import '../../common/color_picker.dart';
 
 class AddCounterScreen extends StatelessWidget {
   AddCounterScreen({super.key, required this.addCounterArgs});

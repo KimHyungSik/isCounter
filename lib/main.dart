@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:is_counter/presentation/addcounter/add_counter_viewmodel.dart';
+import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/route/route.dart' as route;
-import 'package:is_counter/presentation/main/main_viewmodel.dart';
+import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:is_counter/theme/colors.dart';
 import 'package:provider/provider.dart';
 

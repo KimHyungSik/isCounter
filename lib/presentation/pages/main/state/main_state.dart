@@ -1,4 +1,4 @@
-import '../../../database/model/counter/counter_list.dart';
+import '../../../../database/model/counter/counter_list.dart';
 
 sealed class MainState {
   final CounterList counterList;
