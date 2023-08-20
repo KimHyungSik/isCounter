@@ -17,7 +17,12 @@ Route<dynamic> controller(RouteSettings settings) {
         final screen = arg is AddCounterArgs
             ? AddCounterScreen(addCounterArgs: arg)
             : AddCounterScreen(addCounterArgs: AddCounterArgs(null));
-        return MaterialPageRoute(builder: (context) => screen);
+        return MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider(
+            create: (_) => AddCounterViewModel(),
+            child: screen,
+          ),
+        );
       }
     default:
       throw ('This route name does not exit');
