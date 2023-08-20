@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/database/controller/counter_controller.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../common/localization.dart';
 import '../../../database/model/counter/counter.dart';
 import '../../../database/model/counter/counter_method.dart';
 
 class AddCounterViewModel extends ChangeNotifier {
-  CounterController _counterController = CounterController();
+  final String? titleTail;
+  final CounterController _counterController = CounterController();
 
-  String _title = "카운터";
+  AddCounterViewModel(this.titleTail) {
+    _title = "${string(Localize.addCounterTitle)}$titleTail";
+  }
+
+  String _title = "";
+
   String get title => _title;
 
   int _startValue = 0;
@@ -30,11 +37,6 @@ class AddCounterViewModel extends ChangeNotifier {
 
   void setTitle(String title) {
     _title = title;
-    notifyListeners();
-  }
-
-  void addTitleTail(String tail) {
-    _title = title + tail;
     notifyListeners();
   }
 
@@ -65,4 +67,10 @@ class AddCounterViewModel extends ChangeNotifier {
 
     return await _counterController.addCounter(null, counter);
   }
+}
+
+class AddCounterViewModelArgs {
+  final String? titleCounter;
+
+  AddCounterViewModelArgs(this.titleCounter);
 }

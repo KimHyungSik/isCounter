@@ -9,19 +9,14 @@ import '../../../database/model/counter/counter_method.dart';
 import '../../common/color_picker.dart';
 
 class AddCounterScreen extends StatelessWidget {
-  AddCounterScreen({super.key, required this.addCounterArgs});
-
-  final AddCounterArgs addCounterArgs;
-
   final FocusNode fieldTitle = FocusNode(),
       fieldStartPoint = FocusNode(),
       fieldIncreaseValue = FocusNode();
 
+  AddCounterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    context
-        .read<AddCounterViewModel>()
-        .addTitleTail(addCounterArgs.titleCounter.toString());
     return Scaffold(
       appBar: AppBarBuilder().build(),
       body: Column(
@@ -44,7 +39,9 @@ class AddCounterScreen extends StatelessWidget {
                 },
               );
             },
-            child: Text("저장하기"),
+            child: Text(
+              string(Localize.save),
+            ),
           )
         ],
       ),
@@ -216,10 +213,4 @@ class AddCounterScreen extends StatelessWidget {
       },
     );
   }
-}
-
-class AddCounterArgs {
-  final int? titleCounter;
-
-  AddCounterArgs(this.titleCounter);
 }

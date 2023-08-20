@@ -13,14 +13,12 @@ Route<dynamic> controller(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const MainScreen());
     case addScreen:
       {
-        final arg = settings.arguments;
-        final screen = arg is AddCounterArgs
-            ? AddCounterScreen(addCounterArgs: arg)
-            : AddCounterScreen(addCounterArgs: AddCounterArgs(null));
+        final arg = settings.arguments as AddCounterViewModelArgs;
+
         return MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider(
-            create: (_) => AddCounterViewModel(),
-            child: screen,
+            create: (_) => AddCounterViewModel(arg.titleCounter),
+            child: AddCounterScreen(),
           ),
         );
       }

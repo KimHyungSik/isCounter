@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 
 import '../../widgets/counter_list_item.dart';
-import '../addcounter/add_counter_screen.dart';
+import '../addcounter/add_counter_viewmodel.dart';
 import 'main_viewmodel.dart';
 
 class MainScreen extends StatelessWidget {
@@ -21,8 +21,10 @@ class MainScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 route.addScreen,
-                arguments: AddCounterArgs(
-                    context.read<MainViewModel>().counterList.list.length + 1),
+                arguments: AddCounterViewModelArgs(
+                  (context.read<MainViewModel>().counterList.list.length + 1)
+                      .toString(),
+                ),
               ).then((_) => context.read<MainViewModel>().getCounterList());
             },
           )
