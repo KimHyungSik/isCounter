@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
+import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
@@ -45,6 +47,13 @@ class MainScreen extends StatelessWidget {
                 counter: counter,
                 incrementValue: () => viewModel.incrementValue(counter),
                 decrementValue: () => viewModel.decrementValue(counter),
+                navigatorCounterScreen: (Counter counter) {
+                  Navigator.pushNamed(
+                    context,
+                    route.counterScreen,
+                    arguments: CounterViewModelArgs(counter),
+                  ).then((_) => context.read<MainViewModel>().getCounterList());
+                },
               );
             }),
           );

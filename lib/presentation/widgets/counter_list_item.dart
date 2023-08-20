@@ -9,12 +9,14 @@ class CounterListItem extends StatelessWidget {
   final Counter counter;
   final Function() incrementValue;
   final Function() decrementValue;
+  final Function(Counter) navigatorCounterScreen;
 
   const CounterListItem({
     super.key,
     required this.counter,
     required this.incrementValue,
     required this.decrementValue,
+    required this.navigatorCounterScreen,
   });
 
   @override
@@ -40,10 +42,13 @@ class CounterListItem extends StatelessWidget {
                     onPressed: () => decrementValue(),
                   ),
                   const Spacer(),
-                  Consumer<MainViewModel>(
-                    builder: (context, viewModel, _) => Text(
-                      viewModel.getCounter(counter.id).value.toString(),
-                      style: const TextStyle(fontSize: 18),
+                  GestureDetector(
+                    onTap: () => navigatorCounterScreen(counter),
+                    child: Consumer<MainViewModel>(
+                      builder: (context, viewModel, _) => Text(
+                        viewModel.getCounter(counter.id).value.toString(),
+                        style: const TextStyle(fontSize: 18),
+                      ),
                     ),
                   ),
                   const Spacer(),

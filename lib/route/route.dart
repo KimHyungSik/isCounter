@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/presentation/pages/addcounter/add_counter_screen.dart';
 import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/counter/counter_screen.dart';
+import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/main/main_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,14 @@ Route<dynamic> controller(RouteSettings settings) {
         );
       }
     case counterScreen:
-      return MaterialPageRoute(builder: (context) => const CounterScreen());
+      final arg = settings.arguments as CounterViewModelArgs;
+
+      return MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider(
+          create: (context) => CounterViewModel(arg.counter),
+          child: const CounterScreen(),
+        ),
+      );
     default:
       throw ('This route name does not exit');
   }

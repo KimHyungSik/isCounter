@@ -10,16 +10,25 @@ class CounterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarBuilder().setTitle("title").build(),
-      body: GestureDetector(
-        onTap: () {
-          context.read<CounterViewModel>().incrementValue();
-        },
-        child: Center(
-          child: Selector<CounterViewModel, String>(
-            selector: (context, viewModel) => viewModel.value,
-            builder: (context, value, _) {
-              return Text(value);
-            },
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: GestureDetector(
+          onTap: () {
+            context.read<CounterViewModel>().incrementValue();
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Selector<CounterViewModel, String>(
+                selector: (context, viewModel) => viewModel.value,
+                builder: (context, value, _) {
+                  return Text(value);
+                },
+              ),
+            ],
           ),
         ),
       ),
