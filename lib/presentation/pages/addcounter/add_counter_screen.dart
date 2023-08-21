@@ -28,9 +28,27 @@ class AddCounterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   paddedColumn(context),
-                  selectedMethod(context),
+                  selectedMethod(
+                    context,
+                    (method) {
+                      context
+                          .read<AddCounterViewModel>()
+                          .setMethodValue(method);
+                    },
+                  ),
                   const Spacer(),
-                  saveButton(context)
+                  saveButton(
+                    context,
+                    () {
+                      context.read<AddCounterViewModel>().saveCounter().then(
+                        (value) {
+                          if (value) {
+                            Navigator.pop(context);
+                          }
+                        },
+                      );
+                    },
+                  )
                 ],
               ),
             ),
@@ -40,23 +58,29 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  TextButton saveButton(BuildContext context) {
+  TextButton saveButton(
+    BuildContext context,
+    Function() onClick,
+  ) {
     return TextButton(
-      onPressed: () {
-        context.read<AddCounterViewModel>().saveCounter().then(
-          (value) {
-            if (value) {
-              Navigator.pop(context);
-            }
-          },
-        );
-      },
+      onPressed: () => onClick(),
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.zero,
+      ),
       child: Container(
+        height: 50,
         width: double.infinity,
         color: Colors.white,
         alignment: Alignment.center,
-        child: Text(
-          string(Localize.save),
+        child: Column(
+          children: [
+            Text(
+              string(Localize.save),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+          ],
         ),
       ),
     );
@@ -84,7 +108,12 @@ class AddCounterScreen extends StatelessWidget {
           ItemDescription(
             string(Localize.addCounterColorText),
           ),
-          selectedColor(context),
+          selectedColor(
+            context,
+            (select) {
+              context.read<AddCounterViewModel>().selectColor(select);
+            },
+          ),
           ItemDescription(
             string(Localize.addCounterButtonMethod),
           ),
@@ -100,15 +129,15 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Widget selectedMethod(BuildContext context) {
+  Widget selectedMethod(
+    BuildContext context,
+    Function(Method) onClick,
+  ) {
     return MethodRaido(
-      selected: context.select<AddCounterViewModel, Method>(
-        (value) => value.method,
-      ),
-      onChanged: (change) {
-        context.read<AddCounterViewModel>().setMethodValue(change);
-      },
-    );
+        selected: context.select<AddCounterViewModel, Method>(
+          (value) => value.method,
+        ),
+        onChanged: (method) => onClick(method));
   }
 
   TextField incrementValueField(BuildContext context) {
@@ -131,13 +160,14 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Widget selectedColor(BuildContext context) {
+  Widget selectedColor(
+    BuildContext context,
+    Function(int) onClick,
+  ) {
     return ColorPicker(
       selected: context
           .select<AddCounterViewModel, int>((value) => value.selectedColor),
-      click: (select) {
-        context.read<AddCounterViewModel>().selectColor(select);
-      },
+      click: (select) => onClick(select),
     );
   }
 
@@ -193,38 +223,36 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                selectedColor(context),
-                bottomSheetConfrimButton(
-                  context = context,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  child: selectedColor(
+                    context,
+                    (select) {
+                      context.read<AddCounterViewModel>().selectColor(select);
+                      setState(() => {});
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                saveButton(
+                  context,
                   () {
                     Navigator.pop(context);
                     showMethodBottomSheet(context);
                   },
                 ),
                 const SizedBox(
-                  height: 32,
+                  height: 16,
                 )
               ],
             );
           },
         );
       },
-    );
-  }
-
-  TextButton bottomSheetConfrimButton(
-    BuildContext context,
-    void Function() onPressed,
-  ) {
-    return TextButton(
-      onPressed: onPressed,
-      child: Container(
-        width: double.infinity,
-        color: Theme.of(context).colorScheme.primary,
-        child: Text(
-          string(Localize.bottomSheetConfirm),
-        ),
-      ),
     );
   }
 
@@ -241,15 +269,24 @@ class AddCounterScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                selectedMethod(context),
-                bottomSheetConfrimButton(
-                  context = context,
+                selectedMethod(
+                  context,
+                  (method) {
+                    context.read<AddCounterViewModel>().setMethodValue(method);
+                    setState(() => {});
+                  },
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                saveButton(
+                  context,
                   () {
                     Navigator.pop(context);
                   },
                 ),
                 const SizedBox(
-                  height: 32,
+                  height: 16,
                 ),
               ],
             );
