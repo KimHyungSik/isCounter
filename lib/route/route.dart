@@ -4,6 +4,7 @@ import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.d
 import 'package:is_counter/presentation/pages/counter/counter_screen.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/main/main_screen.dart';
+import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 const String mainScreen = 'main';
@@ -13,7 +14,12 @@ const String counterScreen = "counter";
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
     case mainScreen:
-      return MaterialPageRoute(builder: (context) => const MainScreen());
+      return MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider(
+          create: (_) => MainViewModel(),
+          child: const MainScreen(),
+        ),
+      );
     case addScreen:
       {
         final arg = settings.arguments as AddCounterViewModelArgs;

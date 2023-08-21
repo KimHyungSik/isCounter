@@ -28,7 +28,7 @@ class AddCounterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   paddedColumn(context),
-                  selectedMethod(),
+                  selectedMethod(context),
                   const Spacer(),
                   saveButton(context)
                 ],
@@ -84,7 +84,7 @@ class AddCounterScreen extends StatelessWidget {
           ItemDescription(
             string(Localize.addCounterColorText),
           ),
-          selectedColor(),
+          selectedColor(context),
           ItemDescription(
             string(Localize.addCounterButtonMethod),
           ),
@@ -100,16 +100,13 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Selector<AddCounterViewModel, Method> selectedMethod() {
-    return Selector<AddCounterViewModel, Method>(
-      selector: (context, viewModel) => viewModel.method,
-      builder: (context, method, child) {
-        return MethodRaido(
-          selected: method,
-          onCHanged: (change) {
-            context.read<AddCounterViewModel>().setMethodValue(change);
-          },
-        );
+  Widget selectedMethod(BuildContext context) {
+    return MethodRaido(
+      selected: context.select<AddCounterViewModel, Method>(
+        (value) => value.method,
+      ),
+      onChanged: (change) {
+        context.read<AddCounterViewModel>().setMethodValue(change);
       },
     );
   }
@@ -134,16 +131,12 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Selector<AddCounterViewModel, int> selectedColor() {
-    return Selector<AddCounterViewModel, int>(
-      selector: (context, viewModel) => viewModel.selectedColor,
-      builder: (context, selectedColor, child) {
-        return ColorPicker(
-          selected: selectedColor,
-          click: (select) {
-            context.read<AddCounterViewModel>().selectColor(select);
-          },
-        );
+  Widget selectedColor(BuildContext context) {
+    return ColorPicker(
+      selected: context
+          .select<AddCounterViewModel, int>((value) => value.selectedColor),
+      click: (select) {
+        context.read<AddCounterViewModel>().selectColor(select);
       },
     );
   }
@@ -189,7 +182,7 @@ class AddCounterScreen extends StatelessWidget {
   ) {
     return showModalBottomSheet(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext bottomSheetContext) {
         return StatefulBuilder(
           builder: (BuildContext conetxt, StateSetter setState) {
             return Column(
@@ -200,7 +193,7 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                selectedColor(),
+                selectedColor(context),
                 bottomSheetConfrimButton(
                   context = context,
                   () {
@@ -240,7 +233,7 @@ class AddCounterScreen extends StatelessWidget {
   ) {
     return showModalBottomSheet(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext bottomSHeetContext) {
         return StatefulBuilder(
           builder: (BuildContext conetxt, StateSetter setState) {
             return Column(
@@ -248,7 +241,7 @@ class AddCounterScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                selectedMethod(),
+                selectedMethod(context),
                 bottomSheetConfrimButton(
                   context = context,
                   () {

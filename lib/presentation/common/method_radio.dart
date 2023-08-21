@@ -5,10 +5,10 @@ import '../../database/model/counter/counter_method.dart';
 
 class MethodRaido extends StatelessWidget {
   const MethodRaido(
-      {super.key, required this.selected, required this.onCHanged});
+      {super.key, required this.selected, required this.onChanged});
 
   final Method selected;
-  final void Function(Method) onCHanged;
+  final void Function(Method) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MethodRaido extends StatelessWidget {
           groupValue: selected,
           onChanged: (value) {
             if (value != null) {
-              onCHanged(value);
+              onChanged(value);
             }
           },
         ),
@@ -30,7 +30,7 @@ class MethodRaido extends StatelessWidget {
           groupValue: selected,
           onChanged: (value) {
             if (value != null) {
-              onCHanged(value);
+              onChanged(value);
             }
           },
         ),
