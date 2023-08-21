@@ -19,7 +19,7 @@ class CounterScreen extends StatelessWidget {
         appBar: AppBarBuilder()
             .removeElevation()
             .setColor(counterColor)
-            .setTitle("title")
+            .setTitle(context.read<CounterViewModel>().counter.title)
             .build(),
         body: Container(
           color: counterColor,
