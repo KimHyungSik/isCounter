@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/database/controller/counter_controller.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/database/model/counter/counter_list.dart';
+import 'package:is_counter/presentation/pages/main/state/main_mode.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
 
 class MainViewModel extends ChangeNotifier {
   CounterList get counterList => state.counterList;
   final CounterController _counterController = CounterController();
   MainState state = LoadingState();
+  MainMode _mode = MainMode.COUNTER;
+  MainMode get mode => _mode;
 
   MainViewModel() {
     getCounterList();
@@ -35,6 +38,18 @@ class MainViewModel extends ChangeNotifier {
     final value = counter.value - counter.incrementValue;
     counter.value = value;
     _counterController.modifyCounter(counterList, counter);
+    notifyListeners();
+  }
+
+  Future removeCounter(Counter counter) async {
+    final newCounterList =
+        await _counterController.removeCounter(counterList, counter);
+    state = LoadedState(newCounterList);
+    notifyListeners();
+  }
+
+  void setMode(MainMode mode) {
+    _mode = mode;
     notifyListeners();
   }
 }

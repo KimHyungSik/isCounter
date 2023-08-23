@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
+import 'package:is_counter/presentation/pages/main/state/main_mode.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
+import 'package:is_counter/presentation/widgets/counter_list_remove.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
+import 'package:tuple/tuple.dart';
 
 import '../../widgets/counter_list_item.dart';
 import '../addcounter/add_counter_viewmodel.dart';
@@ -16,49 +19,61 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder()
-          .setEndIcon(
-            const Icon(Icons.add),
-            () {
-              Navigator.pushNamed(
-                context,
-                route.addScreen,
-                arguments: AddCounterViewModelArgs(
-                  (context.read<MainViewModel>().counterList.list.length + 1)
-                      .toString(),
-                ),
-              ).then((_) => context.read<MainViewModel>().getCounterList());
-            },
-          )
-          .setEndNav(
-            const Icon(Icons.more_horiz),
-            () {},
-          )
-          .build(),
-      body: Selector<MainViewModel, MainState>(
-        selector: (context, viewModel) => viewModel.state,
-        builder: (context, _, child) {
+      appBar: AppBarBuilder().setEndIcon(
+        const Icon(Icons.add),
+        () {
+          Navigator.pushNamed(
+            context,
+            route.addScreen,
+            arguments: AddCounterViewModelArgs(
+              (context.read<MainViewModel>().counterList.list.length + 1)
+                  .toString(),
+            ),
+          ).then((_) => context.read<MainViewModel>().getCounterList());
+        },
+      ).setEndNav(
+        const Icon(Icons.more_horiz),
+        () {
+          context.read<MainViewModel>().setMode(MainMode.REMOVE);
+        },
+      ).build(),
+      body: Selector<MainViewModel, Tuple2<MainState, MainMode>>(
+        selector: (context, viewModel) =>
+            Tuple2(viewModel.state, viewModel.mode),
+        builder: (context, data, child) {
           final viewModel = context.read<MainViewModel>();
           return ListView.builder(
             itemCount: viewModel.counterList.list.length,
             itemBuilder: ((context, index) {
               final counter = viewModel.counterList.list[index];
-              return CounterListItem(
-                counter: counter,
-                incrementValue: () => viewModel.incrementValue(counter),
-                decrementValue: () => viewModel.decrementValue(counter),
-                navigatorCounterScreen: (Counter counter) {
-                  Navigator.pushNamed(
-                    context,
-                    route.counterScreen,
-                    arguments: CounterViewModelArgs(counter),
-                  ).then((_) => context.read<MainViewModel>().getCounterList());
-                },
-              );
+              return counterListView(counter, viewModel, context, data.item2);
             }),
           );
         },
       ),
     );
+  }
+
+  Widget counterListView(Counter counter, MainViewModel viewModel,
+      BuildContext context, MainMode mode) {
+    if (mode == MainMode.COUNTER) {
+      return CounterListItem(
+        counter: counter,
+        incrementValue: () => viewModel.incrementValue(counter),
+        decrementValue: () => viewModel.decrementValue(counter),
+        navigatorCounterScreen: (Counter counter) {
+          Navigator.pushNamed(
+            context,
+            route.counterScreen,
+            arguments: CounterViewModelArgs(counter),
+          ).then((_) => context.read<MainViewModel>().getCounterList());
+        },
+      );
+    } else {
+      return CounterListRemoveItem(
+        counter: counter,
+        removeFun: (counter) => viewModel.removeCounter(counter),
+      );
+    }
   }
 }
