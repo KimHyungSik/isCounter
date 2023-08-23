@@ -1,0 +1,1 @@
+enum MainMode { COUNTER, REMOVE }
