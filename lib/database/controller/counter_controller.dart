@@ -68,11 +68,9 @@ class CounterController {
         counterList.list.indexWhere((element) => element.id == counter.id);
 
     if (targetIndex != -1) {
-      return counterList;
-    } else {
       counterList.list.removeAt(targetIndex);
-      return counterList;
     }
+    return await setCounterList(counterList);
   }
 
   Future<CounterList> _checkCacheCounterList(
