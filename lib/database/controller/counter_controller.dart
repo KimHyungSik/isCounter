@@ -34,7 +34,7 @@ class CounterController {
     if (targetIndex != -1) {
       counterList.list[targetIndex] = counter;
     } else {
-      counterList.list.add(counter);
+      counterList.list.insert(0, counter);
     }
 
     return await setCounterList(counterList);
