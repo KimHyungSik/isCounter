@@ -28,46 +28,72 @@ class CounterScreen extends StatelessWidget {
           .setTitle(context.read<CounterViewModel>().counter.title)
           .build(),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Selector<CounterViewModel, String>(
-            selector: (context, viewModel) => viewModel.value,
-            builder: (context, value, _) {
-              return Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 56,
-                  color: Colors.white,
-                ),
-              );
-            },
+          const Spacer(
+            flex: 2,
           ),
-          const Spacer(),
-          Row(
-            children: [
-              _myIconButton(
-                context,
-                const Icon(Icons.remove),
-                counterColor,
-                () {
-                  context.read<CounterViewModel>().decrementValue();
-                },
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              _myIconButton(
-                context,
-                const Icon(Icons.add),
-                counterColor,
-                () {
-                  context.read<CounterViewModel>().incrementValue();
-                },
-              ),
-            ],
+          Flexible(
+            flex: 3,
+            fit: FlexFit.tight,
+            child: Selector<CounterViewModel, String>(
+              selector: (context, viewModel) => viewModel.value,
+              builder: (context, value, _) {
+                return Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 56,
+                    color: Colors.black,
+                  ),
+                );
+              },
+            ),
           ),
+          Flexible(
+            flex: 3,
+            fit: FlexFit.tight,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: _myIconButton(
+                      context,
+                      const Icon(Icons.remove),
+                      counterColor,
+                      () {
+                        context.read<CounterViewModel>().decrementValue();
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: _myIconButton(
+                      context,
+                      const Icon(Icons.add),
+                      counterColor,
+                      () {
+                        context.read<CounterViewModel>().incrementValue();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Spacer(
+            flex: 1,
+          )
         ],
       ),
     );
@@ -123,6 +149,8 @@ class CounterScreen extends StatelessWidget {
         color: background,
         borderRadius: BorderRadius.circular(16),
       ),
+      width: double.infinity,
+      height: double.infinity,
       child: IconButton(
         icon: icon,
         onPressed: onPressed,
