@@ -48,8 +48,8 @@ class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setMode(MainMode mode) {
-    _mode = mode;
+  void changeMode() {
+    _mode = _mode == MainMode.COUNTER ? MainMode.REMOVE : MainMode.COUNTER;
     notifyListeners();
   }
 }

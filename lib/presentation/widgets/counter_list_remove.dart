@@ -32,6 +32,13 @@ class CounterListRemoveItem extends StatelessWidget {
               ),
               Row(
                 children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.delete,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () => {},
+                  ),
                   const Spacer(),
                   Consumer<MainViewModel>(
                     builder: (context, viewModel, _) => Text(

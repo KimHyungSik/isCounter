@@ -34,7 +34,7 @@ class MainScreen extends StatelessWidget {
       ).setEndNav(
         const Icon(Icons.more_horiz),
         () {
-          context.read<MainViewModel>().setMode(MainMode.REMOVE);
+          context.read<MainViewModel>().changeMode();
         },
       ).build(),
       body: Selector<MainViewModel, Tuple2<MainState, MainMode>>(
