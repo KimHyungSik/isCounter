@@ -52,7 +52,7 @@ class CounterController {
     if (targetIndex != -1) {
       return false;
     } else {
-      counterList.list.add(counter);
+      counterList.list.insert(0, counter);
     }
     await setCounterList(counterList);
     return true;

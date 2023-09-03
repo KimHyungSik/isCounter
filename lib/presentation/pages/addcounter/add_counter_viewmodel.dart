@@ -63,7 +63,7 @@ class AddCounterViewModel extends ChangeNotifier {
         value: startValue,
         startValue: startValue,
         incrementValue: incrementValue,
-        counterMethod: Method.BUTTON);
+        counterMethod: _method);
 
     return await _counterController.addCounter(null, counter);
   }
