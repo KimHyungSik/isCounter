@@ -40,7 +40,7 @@ class AddCounterScreen extends StatelessWidget {
                     },
                   ),
                   const Spacer(),
-                  saveButton(
+                  _saveButton(
                     context,
                     () {
                       context.read<AddCounterViewModel>().saveCounter().then(
@@ -51,6 +51,10 @@ class AddCounterScreen extends StatelessWidget {
                         },
                       );
                     },
+                    Localize.save,
+                  ),
+                  const SizedBox(
+                    height: 24,
                   )
                 ],
               ),
@@ -61,29 +65,34 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  TextButton saveButton(
+  Widget _saveButton(
     BuildContext context,
     Function() onClick,
+    Localize localize,
   ) {
-    return TextButton(
-      onPressed: () => onClick(),
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.zero,
-      ),
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        color: Colors.white,
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Text(
-              string(Localize.save),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+      child: TextButton(
+        onPressed: () => onClick(),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+        ),
+        child: Container(
+          height: 50,
+          width: double.infinity,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(8)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                string(localize),
+                style: const TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -96,19 +105,19 @@ class AddCounterScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ItemDescription(
+          _itemDescription(
             string(Localize.addCounterTitle),
           ),
           titleTextField(context),
-          ItemDescription(
+          _itemDescription(
             string(Localize.addCounterStartPoint),
           ),
           startValueTextField(context),
-          ItemDescription(
+          _itemDescription(
             string(Localize.addCounterIncreaseValue),
           ),
           incrementValueField(context),
-          ItemDescription(
+          _itemDescription(
             string(Localize.addCounterColorText),
           ),
           selectedColor(
@@ -122,7 +131,7 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Widget ItemDescription(String text) {
+  Widget _itemDescription(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Text(text),
@@ -238,13 +247,10 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                saveButton(
-                  context,
-                  () {
-                    Navigator.pop(context);
-                    showMethodBottomSheet(context);
-                  },
-                ),
+                _saveButton(context, () {
+                  Navigator.pop(context);
+                  showMethodBottomSheet(context);
+                }, Localize.next),
                 const SizedBox(
                   height: 16,
                 )
@@ -282,11 +288,12 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                saveButton(
+                _saveButton(
                   context,
                   () {
                     Navigator.pop(context);
                   },
+                  Localize.save,
                 ),
                 const SizedBox(
                   height: 16,
