@@ -50,101 +50,111 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `카운터`
+  /// `Counter`
   String get add_counter_title {
     return Intl.message(
-      '카운터',
+      'Counter',
       name: 'add_counter_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `카운터 명`
+  /// `Counter Name`
   String get add_counter_title_description {
     return Intl.message(
-      '카운터 명',
+      'Counter Name',
       name: 'add_counter_title_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `카운터 색상`
+  /// `Counter Color`
   String get add_counter_color_text {
     return Intl.message(
-      '카운터 색상',
+      'Counter Color',
       name: 'add_counter_color_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `시작 값`
+  /// `Start Value`
   String get add_counter_start_point {
     return Intl.message(
-      '시작 값',
+      'Start Value',
       name: 'add_counter_start_point',
       desc: '',
       args: [],
     );
   }
 
-  /// `증가 값`
+  /// `Increment Value`
   String get add_counter_increase_value {
     return Intl.message(
-      '증가 값',
+      'Increment Value',
       name: 'add_counter_increase_value',
       desc: '',
       args: [],
     );
   }
 
-  /// `카운터 방법`
+  /// `Counter Method`
   String get add_counter_method {
     return Intl.message(
-      '카운터 방법',
+      'Counter Method',
       name: 'add_counter_method',
       desc: '',
       args: [],
     );
   }
 
-  /// `버튼 방식`
+  /// `Button Method`
   String get add_counter_button_method {
     return Intl.message(
-      '버튼 방식',
+      'Button Method',
       name: 'add_counter_button_method',
       desc: '',
       args: [],
     );
   }
 
-  /// `화면 터치 방식`
+  /// `Screen Touch Method`
   String get add_counter_screen_method {
     return Intl.message(
-      '화면 터치 방식',
+      'Screen Touch Method',
       name: 'add_counter_screen_method',
       desc: '',
       args: [],
     );
   }
 
-  /// `완료`
+  /// `Confirm`
   String get bottom_sheet_confirm {
     return Intl.message(
-      '완료',
+      'Confirm',
       name: 'bottom_sheet_confirm',
       desc: '',
       args: [],
     );
   }
 
-  /// `저장하기`
+  /// `Save`
   String get save {
     return Intl.message(
-      '저장하기',
+      'Save',
       name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
       desc: '',
       args: [],
     );

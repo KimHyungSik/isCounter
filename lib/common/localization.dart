@@ -12,7 +12,8 @@ enum Localize {
   addCounterButtonMethod("add_counter_button_method"),
   addCounterScreenMethod("add_counter_screen_method"),
   bottomSheetConfirm("bottom_sheet_confirm"),
-  save("save");
+  save("save"),
+  next("next");
 
   final String key;
   const Localize(this.key);

@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_counter_title_description":
             MessageLookupByLibrary.simpleMessage("카운터 명"),
         "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("완료"),
+        "next": MessageLookupByLibrary.simpleMessage("다음"),
         "save": MessageLookupByLibrary.simpleMessage("저장하기")
       };
 }

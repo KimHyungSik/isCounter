@@ -23,19 +23,22 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add_counter_button_method":
-            MessageLookupByLibrary.simpleMessage("버튼 방식"),
+            MessageLookupByLibrary.simpleMessage("Button Method"),
         "add_counter_color_text":
-            MessageLookupByLibrary.simpleMessage("카운터 색상"),
+            MessageLookupByLibrary.simpleMessage("Counter Color"),
         "add_counter_increase_value":
-            MessageLookupByLibrary.simpleMessage("증가 값"),
-        "add_counter_method": MessageLookupByLibrary.simpleMessage("카운터 방법"),
+            MessageLookupByLibrary.simpleMessage("Increment Value"),
+        "add_counter_method":
+            MessageLookupByLibrary.simpleMessage("Counter Method"),
         "add_counter_screen_method":
-            MessageLookupByLibrary.simpleMessage("화면 터치 방식"),
-        "add_counter_start_point": MessageLookupByLibrary.simpleMessage("시작 값"),
-        "add_counter_title": MessageLookupByLibrary.simpleMessage("카운터"),
+            MessageLookupByLibrary.simpleMessage("Screen Touch Method"),
+        "add_counter_start_point":
+            MessageLookupByLibrary.simpleMessage("Start Value"),
+        "add_counter_title": MessageLookupByLibrary.simpleMessage("Counter"),
         "add_counter_title_description":
-            MessageLookupByLibrary.simpleMessage("카운터 명"),
-        "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("완료"),
-        "save": MessageLookupByLibrary.simpleMessage("저장하기")
+            MessageLookupByLibrary.simpleMessage("Counter Name"),
+        "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "save": MessageLookupByLibrary.simpleMessage("Save")
       };
 }
