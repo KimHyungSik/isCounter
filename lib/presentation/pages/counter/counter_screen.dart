@@ -5,6 +5,7 @@ import 'package:is_counter/presentation/pages/counter/button_counter.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/counter/screen_counter.dart';
 import 'package:is_counter/presentation/widgets/color_picker.dart';
+import 'package:is_counter/route/route.dart';
 import 'package:provider/provider.dart';
 
 class CounterScreen extends StatelessWidget {
@@ -20,6 +21,15 @@ class CounterScreen extends StatelessWidget {
           .removeElevation()
           .setColor(counterColor)
           .setTitle(context.read<CounterViewModel>().counter.title)
+          .setEndNav(
+            const Icon(Icons.more_horiz),
+            () => {
+              Navigator.pushNamed(
+                context,
+                counterSetting,
+              )
+            },
+          )
           .build(),
       body: SafeArea(
         child: _counterFactory(context, counterColor),

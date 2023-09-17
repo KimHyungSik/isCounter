@@ -3,6 +3,7 @@ import 'package:is_counter/presentation/pages/addcounter/add_counter_screen.dart
 import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/counter/counter_screen.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
+import 'package:is_counter/presentation/pages/counter_setting/counter_setting_screen.dart';
 import 'package:is_counter/presentation/pages/main/main_screen.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 const String mainScreen = 'main';
 const String addScreen = 'add';
 const String counterScreen = "counter";
+const String counterSetting = "settingCounter";
 
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
@@ -40,6 +42,9 @@ Route<dynamic> controller(RouteSettings settings) {
           child: const CounterScreen(),
         ),
       );
+    case counterSetting:
+      return MaterialPageRoute(
+          builder: (context) => const CounterSettingScreen());
     default:
       throw ('This route name does not exit');
   }
