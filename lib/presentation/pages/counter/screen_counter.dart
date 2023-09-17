@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 GestureDetector screenTouchCounter(BuildContext context, Color counterColor) {
   return GestureDetector(
     onTap: () {
+      HapticFeedback.lightImpact();
       context.read<CounterViewModel>().incrementValue();
     },
     child: Container(

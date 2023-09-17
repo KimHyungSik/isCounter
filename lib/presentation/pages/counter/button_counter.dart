@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/pages/counter/counter_button.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
@@ -46,6 +47,7 @@ Widget buttonCounter(BuildContext context, Color counterColor) {
                   const Icon(Icons.remove),
                   counterColor,
                   () {
+                    HapticFeedback.lightImpact();
                     context.read<CounterViewModel>().decrementValue();
                   },
                 ),
@@ -61,6 +63,7 @@ Widget buttonCounter(BuildContext context, Color counterColor) {
                   const Icon(Icons.add),
                   counterColor,
                   () {
+                    HapticFeedback.lightImpact();
                     context.read<CounterViewModel>().incrementValue();
                   },
                 ),
