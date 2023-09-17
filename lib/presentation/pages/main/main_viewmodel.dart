@@ -52,4 +52,9 @@ class MainViewModel extends ChangeNotifier {
     _mode = _mode == MainMode.COUNTER ? MainMode.REMOVE : MainMode.COUNTER;
     notifyListeners();
   }
+
+  void changeTitle(Counter counter) {
+    _counterController.modifyCounter(counterList, counter);
+    notifyListeners();
+  }
 }

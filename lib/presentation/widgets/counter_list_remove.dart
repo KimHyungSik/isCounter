@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
-import 'package:is_counter/presentation/common/color_picker.dart';
+import 'package:is_counter/presentation/widgets/color_picker.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +16,7 @@ class CounterListRemoveItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<MainViewModel>();
     return ListTile(
       title: Card(
         shape: RoundedRectangleBorder(
@@ -25,10 +26,24 @@ class CounterListRemoveItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                counter.title,
-                style: const TextStyle(fontSize: 18),
+              IntrinsicWidth(
+                child: TextField(
+                  controller: TextEditingController(
+                    text: counter.title,
+                  ),
+                  style: const TextStyle(fontSize: 18),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  maxLines: 1,
+                  onChanged: (value) {
+                    counter.title = value;
+                    viewModel.changeTitle(counter);
+                  },
+                ),
               ),
               Row(
                 children: [

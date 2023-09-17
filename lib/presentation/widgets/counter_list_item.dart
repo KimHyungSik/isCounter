@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/model/counter/counter.dart';
-import '../common/color_picker.dart';
+import 'color_picker.dart';
 import '../pages/main/main_viewmodel.dart';
 
 class CounterListItem extends StatelessWidget {
