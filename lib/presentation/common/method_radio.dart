@@ -14,27 +14,31 @@ class MethodRaido extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RadioListTile(
-          title: Text(string(Localize.addCounterButtonMethod)),
-          value: Method.BUTTON,
-          groupValue: selected,
-          onChanged: (value) {
-            if (value != null) {
-              onChanged(value);
-            }
-          },
+        methodRadioListTile(
+          string(Localize.addCounterButtonMethod),
+          Method.BUTTON,
         ),
-        RadioListTile(
-          title: Text(string(Localize.addCounterScreenMethod)),
-          value: Method.SCREEN,
-          groupValue: selected,
-          onChanged: (value) {
-            if (value != null) {
-              onChanged(value);
-            }
-          },
+        methodRadioListTile(
+          string(Localize.addCounterScreenMethod),
+          Method.SCREEN,
         ),
       ],
+    );
+  }
+
+  RadioListTile<Method> methodRadioListTile(
+    String title,
+    Method value,
+  ) {
+    return RadioListTile(
+      title: Text(title),
+      value: value,
+      groupValue: selected,
+      onChanged: (value) {
+        if (value != null) {
+          onChanged(value);
+        }
+      },
     );
   }
 }
