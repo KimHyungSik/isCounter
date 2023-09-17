@@ -31,11 +31,11 @@ class AddCounterScreen extends StatelessWidget {
             child: IntrinsicHeight(
               child: Column(
                 children: [
-                  paddedColumn(context),
+                  _paddedColumn(context),
                   const SizedBox(
                     height: 16,
                   ),
-                  selectedMethod(
+                  _selectedMethod(
                     context,
                     (method) {
                       context
@@ -102,7 +102,7 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Padding paddedColumn(BuildContext context) {
+  Padding _paddedColumn(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -112,7 +112,7 @@ class AddCounterScreen extends StatelessWidget {
           _itemDescription(
             string(Localize.addCounterTitle),
           ),
-          titleTextField(context),
+          _titleTextField(context),
           _itemDescription(
             string(Localize.addCounterStartPoint),
           ),
@@ -120,11 +120,11 @@ class AddCounterScreen extends StatelessWidget {
           _itemDescription(
             string(Localize.addCounterIncreaseValue),
           ),
-          incrementValueField(context),
+          _incrementValueField(context),
           _itemDescription(
             string(Localize.addCounterColorText),
           ),
-          selectedColor(
+          _selectedColor(
             context,
             (select) {
               context.read<AddCounterViewModel>().selectColor(select);
@@ -142,7 +142,7 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Widget selectedMethod(
+  Widget _selectedMethod(
     BuildContext context,
     Function(Method) onClick,
   ) {
@@ -153,7 +153,7 @@ class AddCounterScreen extends StatelessWidget {
         onChanged: (method) => onClick(method));
   }
 
-  TextField incrementValueField(BuildContext context) {
+  TextField _incrementValueField(BuildContext context) {
     final viewModel = context.read<AddCounterViewModel>();
     return TextField(
       controller:
@@ -164,7 +164,7 @@ class AddCounterScreen extends StatelessWidget {
         hintText: string(Localize.addCounterIncreaseValue),
       ),
       onSubmitted: (value) {
-        showColorPickerBottomSheet(context);
+        _showColorPickerBottomSheet(context);
       },
       onChanged: (value) {
         viewModel.setIncrementValue(int.parse(value));
@@ -173,7 +173,7 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Widget selectedColor(
+  Widget _selectedColor(
     BuildContext context,
     Function(int) onClick,
   ) {
@@ -203,7 +203,7 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  TextField titleTextField(BuildContext context) {
+  TextField _titleTextField(BuildContext context) {
     final viewModel = context.read<AddCounterViewModel>();
     return TextField(
       controller: TextEditingController(text: viewModel.title),
@@ -220,7 +220,7 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Future<dynamic> showColorPickerBottomSheet(
+  Future<dynamic> _showColorPickerBottomSheet(
     BuildContext context,
   ) {
     return showModalBottomSheet(
@@ -240,7 +240,7 @@ class AddCounterScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
-                  child: selectedColor(
+                  child: _selectedColor(
                     context,
                     (select) {
                       context.read<AddCounterViewModel>().selectColor(select);
@@ -253,7 +253,7 @@ class AddCounterScreen extends StatelessWidget {
                 ),
                 _saveButton(context, () {
                   Navigator.pop(context);
-                  showMethodBottomSheet(context);
+                  _showMethodBottomSheet(context);
                 }, Localize.next),
                 const SizedBox(
                   height: 16,
@@ -266,7 +266,7 @@ class AddCounterScreen extends StatelessWidget {
     );
   }
 
-  Future<dynamic> showMethodBottomSheet(
+  Future<dynamic> _showMethodBottomSheet(
     BuildContext context,
   ) {
     return showModalBottomSheet(
@@ -282,7 +282,7 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                selectedMethod(
+                _selectedMethod(
                   context,
                   (method) {
                     context.read<AddCounterViewModel>().setMethodValue(method);
