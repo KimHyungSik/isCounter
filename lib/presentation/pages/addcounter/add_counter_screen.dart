@@ -19,7 +19,11 @@ class AddCounterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBarBuilder().build(),
+      appBar: AppBarBuilder()
+          .setTitle(
+            string(Localize.addCounterTitle),
+          )
+          .build(),
       body: LayoutBuilder(builder: (context, constraint) {
         return SingleChildScrollView(
           child: ConstrainedBox(

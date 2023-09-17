@@ -32,7 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_counter_screen_method":
             MessageLookupByLibrary.simpleMessage("화면 터치 방식"),
         "add_counter_start_point": MessageLookupByLibrary.simpleMessage("시작 값"),
-        "add_counter_title": MessageLookupByLibrary.simpleMessage("카운터"),
+        "add_counter_title":
+            MessageLookupByLibrary.simpleMessage("새로운 카운터 만들기"),
         "add_counter_title_description":
             MessageLookupByLibrary.simpleMessage("카운터 명"),
         "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("완료"),
