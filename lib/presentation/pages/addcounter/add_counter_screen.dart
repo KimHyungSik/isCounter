@@ -28,6 +28,9 @@ class AddCounterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   paddedColumn(context),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   selectedMethod(
                     context,
                     (method) {
@@ -113,9 +116,6 @@ class AddCounterScreen extends StatelessWidget {
             (select) {
               context.read<AddCounterViewModel>().selectColor(select);
             },
-          ),
-          ItemDescription(
-            string(Localize.addCounterButtonMethod),
           ),
         ],
       ),
@@ -269,6 +269,9 @@ class AddCounterScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 16,
+                ),
                 selectedMethod(
                   context,
                   (method) {

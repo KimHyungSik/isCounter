@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../common/localization.dart';
 import '../../database/model/counter/counter_method.dart';
+import '../../theme/colors.dart';
 
 class MethodRaido extends StatelessWidget {
   const MethodRaido(
@@ -17,28 +18,42 @@ class MethodRaido extends StatelessWidget {
         methodRadioListTile(
           string(Localize.addCounterButtonMethod),
           Method.BUTTON,
+          context,
         ),
         methodRadioListTile(
           string(Localize.addCounterScreenMethod),
           Method.SCREEN,
+          context,
         ),
       ],
     );
   }
 
-  RadioListTile<Method> methodRadioListTile(
-    String title,
-    Method value,
-  ) {
-    return RadioListTile(
-      title: Text(title),
-      value: value,
-      groupValue: selected,
-      onChanged: (value) {
-        if (value != null) {
-          onChanged(value);
-        }
-      },
+  Widget methodRadioListTile(String title, Method value, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      child: Container(
+        decoration: BoxDecoration(
+          color: lightContainerBackgroundColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: selected == value
+                ? Theme.of(context).dividerColor
+                : lightContainerBackgroundColor,
+            width: 2,
+          ),
+        ),
+        child: RadioListTile(
+          title: Text(title),
+          value: value,
+          groupValue: selected,
+          onChanged: (value) {
+            if (value != null) {
+              onChanged(value);
+            }
+          },
+        ),
+      ),
     );
   }
 }
