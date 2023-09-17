@@ -30,8 +30,10 @@ class CounterListItem extends StatelessWidget {
           ),
           color: counterColors[counter.color],
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   counter.title,

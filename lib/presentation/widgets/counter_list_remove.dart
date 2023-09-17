@@ -36,6 +36,8 @@ class CounterListRemoveItem extends StatelessWidget {
                   ),
                   style: const TextStyle(fontSize: 18),
                   decoration: const InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.all(0),
                     border: InputBorder.none,
                   ),
                   maxLines: 1,
