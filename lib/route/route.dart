@@ -4,6 +4,7 @@ import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.d
 import 'package:is_counter/presentation/pages/counter/counter_screen.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/counter_setting/counter_setting_screen.dart';
+import 'package:is_counter/presentation/pages/counter_setting/counter_setting_viewmodel.dart';
 import 'package:is_counter/presentation/pages/main/main_screen.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -43,8 +44,14 @@ Route<dynamic> controller(RouteSettings settings) {
         ),
       );
     case counterSetting:
+      final arg = settings.arguments as CounterSettingViewModelArgs;
+
       return MaterialPageRoute(
-          builder: (context) => const CounterSettingScreen());
+        builder: (context) => ChangeNotifierProvider(
+          create: (context) => CounterSettingViewModel(arg),
+          child: const CounterSettingScreen(),
+        ),
+      );
     default:
       throw ('This route name does not exit');
   }
