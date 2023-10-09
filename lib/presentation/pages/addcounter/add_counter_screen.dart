@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/common/localization.dart';
 import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
+import 'package:is_counter/presentation/widgets/counter_text_field.dart';
 import 'package:is_counter/presentation/widgets/method_radio.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/model/counter/counter_method.dart';
 import '../../widgets/color_picker.dart';
+import '../../widgets/counter_itme_description.dart';
 
 class AddCounterScreen extends StatelessWidget {
   final FocusNode fieldTitle = FocusNode(),
@@ -103,25 +105,48 @@ class AddCounterScreen extends StatelessWidget {
   }
 
   Padding _paddedColumn(BuildContext context) {
+    final viewModel = context.read<AddCounterViewModel>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _itemDescription(
+          counterItemDescription(
             string(Localize.addCounterTitleDescription),
           ),
-          _titleTextField(context),
-          _itemDescription(
+          counterTextField(
+            context,
+            focusNode: fieldTitle,
+            controllerTitle: viewModel.title,
+            onChanged: (value) => viewModel.setTitle(value),
+            onSubmitted: (_) =>
+                FocusScope.of(context).requestFocus(fieldStartPoint),
+          ),
+          counterItemDescription(
             string(Localize.addCounterStartPoint),
           ),
-          startValueTextField(context),
-          _itemDescription(
+          counterTextField(
+            context,
+            focusNode: fieldStartPoint,
+            controllerTitle: viewModel.startValue.toString(),
+            onChanged: (value) => viewModel.setStartValue(int.parse(value)),
+            onSubmitted: (_) =>
+                FocusScope.of(context).requestFocus(fieldIncreaseValue),
+            keyboardType: TextInputType.number,
+          ),
+          counterItemDescription(
             string(Localize.addCounterIncreaseValue),
           ),
-          _incrementValueField(context),
-          _itemDescription(
+          counterTextField(
+            context,
+            focusNode: fieldIncreaseValue,
+            controllerTitle: viewModel.incrementValue.toString(),
+            onChanged: (value) => viewModel.setIncrementValue(int.parse(value)),
+            onSubmitted: (_) => _showColorPickerBottomSheet(context),
+            keyboardType: TextInputType.number,
+          ),
+          counterItemDescription(
             string(Localize.addCounterColorText),
           ),
           _selectedColor(
@@ -132,13 +157,6 @@ class AddCounterScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _itemDescription(String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Text(text),
     );
   }
 
@@ -153,26 +171,6 @@ class AddCounterScreen extends StatelessWidget {
         onChanged: (method) => onClick(method));
   }
 
-  TextField _incrementValueField(BuildContext context) {
-    final viewModel = context.read<AddCounterViewModel>();
-    return TextField(
-      controller:
-          TextEditingController(text: viewModel.incrementValue.toString()),
-      focusNode: fieldIncreaseValue,
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        hintText: string(Localize.addCounterIncreaseValue),
-      ),
-      onSubmitted: (value) {
-        _showColorPickerBottomSheet(context);
-      },
-      onChanged: (value) {
-        viewModel.setIncrementValue(int.parse(value));
-      },
-      keyboardType: TextInputType.number,
-    );
-  }
-
   Widget _selectedColor(
     BuildContext context,
     Function(int) onClick,
@@ -181,42 +179,6 @@ class AddCounterScreen extends StatelessWidget {
       selected: context
           .select<AddCounterViewModel, int>((value) => value.selectedColor),
       click: (select) => onClick(select),
-    );
-  }
-
-  TextField startValueTextField(BuildContext context) {
-    final viewModel = context.read<AddCounterViewModel>();
-    return TextField(
-      controller: TextEditingController(text: viewModel.startValue.toString()),
-      focusNode: fieldStartPoint,
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        hintText: string(Localize.addCounterStartPoint),
-      ),
-      onSubmitted: (value) {
-        FocusScope.of(context).requestFocus(fieldIncreaseValue);
-      },
-      onChanged: (value) {
-        viewModel.setStartValue(int.parse(value));
-      },
-      keyboardType: TextInputType.number,
-    );
-  }
-
-  TextField _titleTextField(BuildContext context) {
-    final viewModel = context.read<AddCounterViewModel>();
-    return TextField(
-      controller: TextEditingController(text: viewModel.title),
-      focusNode: fieldTitle,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-      ),
-      onSubmitted: (value) {
-        FocusScope.of(context).requestFocus(fieldStartPoint);
-      },
-      onChanged: (value) {
-        viewModel.setTitle(value);
-      },
     );
   }
 
