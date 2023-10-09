@@ -110,7 +110,7 @@ class AddCounterScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _itemDescription(
-            string(Localize.addCounterTitle),
+            string(Localize.addCounterTitleDescription),
           ),
           _titleTextField(context),
           _itemDescription(

@@ -8,11 +8,11 @@ import '../../../database/model/counter/counter.dart';
 import '../../../database/model/counter/counter_method.dart';
 
 class AddCounterViewModel extends ChangeNotifier {
-  final String? titleTail;
+  final String? titleCounter;
   final CounterController _counterController = CounterController();
 
-  AddCounterViewModel(this.titleTail) {
-    _title = "${string(Localize.addCounterTitle)}$titleTail";
+  AddCounterViewModel(this.titleCounter) {
+    _title = "${string(Localize.counter)} $titleCounter";
   }
 
   String _title = "";
