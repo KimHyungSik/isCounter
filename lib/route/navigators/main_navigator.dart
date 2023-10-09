@@ -8,17 +8,13 @@ import '../../presentation/pages/main/main_viewmodel.dart';
 import '../base_navigator.dart';
 
 class MainScreenNav extends BaseNavigator {
+  MainScreenNav.nav(super.settins) : super.nav();
+  MainScreenNav.pushNamed(
+      BuildContext context, BaseArgs? args, Function? callback)
+      : super.pushNamed(context, args, callback);
+
   @override
   String get route => mainScreen;
-
-  MainScreenNav.nav(RouteSettings settins) {
-    this.settins = settins;
-  }
-
-  MainScreenNav.navigate(
-      BuildContext context, BaseArgs args, Function? callback) {
-    navigate(context, args, callback);
-  }
 
   @override
   MaterialPageRoute pageRoute() {
@@ -31,7 +27,7 @@ class MainScreenNav extends BaseNavigator {
   }
 
   @override
-  void navigate(BuildContext context, BaseArgs args, Function? callback) {
+  void navigator(BuildContext context, BaseArgs? args, Function? callback) {
     Navigator.pushNamed(
       context,
       route,

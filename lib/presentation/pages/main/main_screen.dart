@@ -6,6 +6,7 @@ import 'package:is_counter/presentation/pages/main/state/main_mode.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
 import 'package:is_counter/presentation/widgets/counter_list_remove.dart';
 import 'package:is_counter/route/navigators/add_counter_navigator.dart';
+import 'package:is_counter/route/navigators/counter_navigator.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:tuple/tuple.dart';
@@ -27,7 +28,7 @@ class MainScreen extends StatelessWidget {
             (context.read<MainViewModel>().counterList.list.length + 1)
                 .toString(),
           );
-          AddCounterNav.navigate(
+          AddCounterNav.pushNamed(
             context,
             args,
             () {
@@ -66,11 +67,13 @@ class MainScreen extends StatelessWidget {
         incrementValue: () => viewModel.incrementValue(counter),
         decrementValue: () => viewModel.decrementValue(counter),
         navigatorCounterScreen: (Counter counter) {
-          Navigator.pushNamed(
+          CounterNav.pushNamed(
             context,
-            route.counterScreen,
-            arguments: CounterViewModelArgs(counter),
-          ).then((_) => context.read<MainViewModel>().getCounterList());
+            CounterViewModelArgs(counter),
+            () {
+              (_) => context.read<MainViewModel>().getCounterList();
+            },
+          );
         },
       );
     } else {

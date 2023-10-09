@@ -8,6 +8,7 @@ import 'package:is_counter/presentation/pages/counter_setting/counter_setting_vi
 import 'package:is_counter/presentation/pages/main/main_screen.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:is_counter/route/navigators/add_counter_navigator.dart';
+import 'package:is_counter/route/navigators/counter_navigator.dart';
 import 'package:is_counter/route/navigators/main_navigator.dart';
 import 'package:provider/provider.dart';
 
@@ -23,14 +24,7 @@ Route<dynamic> controller(RouteSettings settings) {
     case addScreen:
       return AddCounterNav.nav(settings).pageRoute();
     case counterScreen:
-      final arg = settings.arguments as CounterViewModelArgs;
-
-      return MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider(
-          create: (context) => CounterViewModel(arg.counter),
-          child: const CounterScreen(),
-        ),
-      );
+      return CounterNav.nav(settings).pageRoute();
     case counterSetting:
       final arg = settings.arguments as CounterSettingViewModelArgs;
 
