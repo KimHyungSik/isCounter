@@ -1,4 +1,5 @@
 {
+    "counter" : "카운터",
     "add_counter_title" : "새로운 카운터 만들기",
     "add_counter_title_description" : "카운터 명",
     "add_counter_color_text" : "카운터 색상",

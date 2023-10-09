@@ -51,9 +51,19 @@ class S {
   }
 
   /// `Counter`
-  String get add_counter_title {
+  String get counter {
     return Intl.message(
       'Counter',
+      name: 'counter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `new Counter`
+  String get add_counter_title {
+    return Intl.message(
+      'new Counter',
       name: 'add_counter_title',
       desc: '',
       args: [],

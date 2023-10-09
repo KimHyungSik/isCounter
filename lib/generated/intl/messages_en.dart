@@ -34,10 +34,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Screen Touch Method"),
         "add_counter_start_point":
             MessageLookupByLibrary.simpleMessage("Start Value"),
-        "add_counter_title": MessageLookupByLibrary.simpleMessage("Counter"),
+        "add_counter_title":
+            MessageLookupByLibrary.simpleMessage("new Counter"),
         "add_counter_title_description":
             MessageLookupByLibrary.simpleMessage("Counter Name"),
         "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "counter": MessageLookupByLibrary.simpleMessage("Counter"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "save": MessageLookupByLibrary.simpleMessage("Save")
       };

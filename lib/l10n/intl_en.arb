@@ -1,5 +1,6 @@
 {
-    "add_counter_title": "Counter",
+    "counter" : "Counter",
+    "add_counter_title": "new Counter",
     "add_counter_title_description": "Counter Name",
     "add_counter_color_text": "Counter Color",
     "add_counter_start_point": "Start Value",
