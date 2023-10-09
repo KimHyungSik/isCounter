@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/database/controller/counter_controller.dart';
+import 'package:is_counter/route/base_args.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../common/localization.dart';
@@ -69,7 +70,7 @@ class AddCounterViewModel extends ChangeNotifier {
   }
 }
 
-class AddCounterViewModelArgs {
+class AddCounterViewModelArgs extends BaseArgs {
   final String? titleCounter;
 
   AddCounterViewModelArgs(this.titleCounter);

@@ -5,6 +5,7 @@ import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/main/state/main_mode.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
 import 'package:is_counter/presentation/widgets/counter_list_remove.dart';
+import 'package:is_counter/route/navigators/add_counter_navigator.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:tuple/tuple.dart';
@@ -22,14 +23,17 @@ class MainScreen extends StatelessWidget {
       appBar: AppBarBuilder().setEndIcon(
         const Icon(Icons.add),
         () {
-          Navigator.pushNamed(
+          final args = AddCounterViewModelArgs(
+            (context.read<MainViewModel>().counterList.list.length + 1)
+                .toString(),
+          );
+          AddCounterNav.navigate(
             context,
-            route.addScreen,
-            arguments: AddCounterViewModelArgs(
-              (context.read<MainViewModel>().counterList.list.length + 1)
-                  .toString(),
-            ),
-          ).then((_) => context.read<MainViewModel>().getCounterList());
+            args,
+            () {
+              context.read<MainViewModel>().getCounterList();
+            },
+          );
         },
       ).setEndNav(
         const Icon(Icons.more_horiz),

@@ -7,6 +7,8 @@ import 'package:is_counter/presentation/pages/counter_setting/counter_setting_sc
 import 'package:is_counter/presentation/pages/counter_setting/counter_setting_viewmodel.dart';
 import 'package:is_counter/presentation/pages/main/main_screen.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
+import 'package:is_counter/route/navigators/add_counter_navigator.dart';
+import 'package:is_counter/route/navigators/main_navigator.dart';
 import 'package:provider/provider.dart';
 
 const String mainScreen = 'main';
@@ -17,23 +19,9 @@ const String counterSetting = "settingCounter";
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
     case mainScreen:
-      return MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider(
-          create: (_) => MainViewModel(),
-          child: const MainScreen(),
-        ),
-      );
+      return MainScreenNav.nav(settings).pageRoute();
     case addScreen:
-      {
-        final arg = settings.arguments as AddCounterViewModelArgs;
-
-        return MaterialPageRoute(
-          builder: (context) => ChangeNotifierProvider(
-            create: (_) => AddCounterViewModel(arg.titleCounter),
-            child: AddCounterScreen(),
-          ),
-        );
-      }
+      return AddCounterNav.nav(settings).pageRoute();
     case counterScreen:
       final arg = settings.arguments as CounterViewModelArgs;
 
