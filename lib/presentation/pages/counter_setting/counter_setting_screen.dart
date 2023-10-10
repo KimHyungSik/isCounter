@@ -73,7 +73,11 @@ class CounterSettingScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     saveButton(context, () {
-                      Navigator.pop(context);
+                      context.read<CounterSettingViewModel>().saveCounter(
+                        () {
+                          Navigator.pop(context);
+                        },
+                      );
                     }, Localize.save),
                     const SizedBox(
                       height: 24,
