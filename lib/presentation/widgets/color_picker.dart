@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 final List<Color> counterColors = [
   Colors.red,
   Colors.orange,
-  Colors.yellow,
   Colors.green,
   Colors.blue,
   Colors.indigo,

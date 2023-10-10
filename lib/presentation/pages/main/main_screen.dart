@@ -4,14 +4,14 @@ import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/main/state/main_mode.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
-import 'package:is_counter/presentation/widgets/counter_list_remove.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_list_item.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_list_remove.dart';
 import 'package:is_counter/route/navigators/add_counter_navigator.dart';
 import 'package:is_counter/route/navigators/counter_navigator.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:tuple/tuple.dart';
 
-import '../../widgets/counter_list_item.dart';
 import '../addcounter/add_counter_viewmodel.dart';
 import 'main_viewmodel.dart';
 

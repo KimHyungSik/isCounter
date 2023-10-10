@@ -14,6 +14,7 @@ class CounterSettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<CounterSettingViewModel>();
     return Scaffold(
       appBar: AppBarBuilder()
           .setTitle(context.read<CounterSettingViewModel>().title)
@@ -38,20 +39,17 @@ class CounterSettingScreen extends StatelessWidget {
                     ),
                     counterTextField(
                       context,
-                      controllerTitle:
-                          context.select<CounterSettingViewModel, String>(
-                        (value) => value.counter.title,
-                      ),
+                      controllerTitle: viewModel.counter.title,
+                      onChanged: viewModel.setTitle,
                     ),
                     counterItemDescription(
                       string(Localize.addCounterStartPoint),
                     ),
                     counterTextField(
                       context,
-                      controllerTitle:
-                          context.select<CounterSettingViewModel, String>(
-                        (value) => value.counter.startValue.toString(),
-                      ),
+                      controllerTitle: viewModel.counter.startValue.toString(),
+                      onChanged: (value) =>
+                          viewModel.setStartValue(int.parse(value)),
                     ),
                     counterItemDescription(
                       string(Localize.addCounterIncreaseValue),
@@ -59,17 +57,18 @@ class CounterSettingScreen extends StatelessWidget {
                     counterTextField(
                       context,
                       controllerTitle:
-                          context.select<CounterSettingViewModel, String>(
-                        (value) => value.counter.incrementValue.toString(),
-                      ),
+                          viewModel.counter.incrementValue.toString(),
+                      onChanged: (value) =>
+                          viewModel.setIncrementValue(int.parse(value)),
                     ),
                     counterItemDescription(
                       string(Localize.addCounterColorText),
                     ),
                     ColorPicker(
-                      selected: context.select<CounterSettingViewModel, int>(
-                          (value) => value.counter.color),
-                      onClick: (value) {},
+                      selected: viewModel.counter.color,
+                      onClick: (value) {
+                        viewModel.selectColor(value);
+                      },
                     ),
                     const Spacer(),
                     saveButton(context, () {

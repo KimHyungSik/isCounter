@@ -7,6 +7,7 @@ class CounterSettingViewModel extends ChangeNotifier {
   final CounterController _counterController = CounterController();
   final CounterSettingViewModelArgs _args;
 
+  String get title => _args.counter.title;
   Counter get counter => _args.counter;
 
   CounterSettingViewModel(this._args);
