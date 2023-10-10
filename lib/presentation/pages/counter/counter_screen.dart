@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/database/model/counter/counter_method.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/pages/counter/button_counter.dart';
@@ -15,14 +16,17 @@ class CounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counterColor =
-        counterColors[context.read<CounterViewModel>().counter.color];
+    final counterColor = counterColors[context
+        .select<CounterViewModel, int>((viewModel) => viewModel.counter.color)];
 
     return Scaffold(
       appBar: AppBarBuilder()
           .removeElevation()
           .setColor(counterColor)
-          .setTitle(context.read<CounterViewModel>().counter.title)
+          .setTitle(
+            context.select<CounterViewModel, String>(
+                (viewModel) => viewModel.counter.title),
+          )
           .setEndNav(
             const Icon(Icons.more_horiz),
             () => {
@@ -30,13 +34,20 @@ class CounterScreen extends StatelessWidget {
                 context,
                 CounterSettingViewModelArgs(
                     context.read<CounterViewModel>().counter),
-                () {},
+                (value) {
+                  final counter = value as Counter;
+                  context.read<CounterViewModel>().setNewCounter(counter);
+                },
               )
             },
           )
           .build(),
       body: SafeArea(
-        child: _counterFactory(context, counterColor),
+        child: Selector<CounterViewModel, Counter>(
+            selector: (context, viewModel) => viewModel.counter,
+            builder: (context, _, __) {
+              return _counterFactory(context, counterColor);
+            }),
       ),
     );
   }

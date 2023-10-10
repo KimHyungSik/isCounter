@@ -74,7 +74,7 @@ class CounterSettingScreen extends StatelessWidget {
                     saveButton(context, () {
                       context.read<CounterSettingViewModel>().saveCounter(
                         () {
-                          Navigator.pop(context);
+                          Navigator.pop(context, viewModel.counter);
                         },
                       );
                     }, Localize.save),

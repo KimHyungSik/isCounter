@@ -10,7 +10,7 @@ import '../base_navigator.dart';
 class MainScreenNav extends BaseNavigator {
   MainScreenNav.nav(super.settins) : super.nav();
   MainScreenNav.pushNamed(
-      BuildContext context, BaseArgs? args, Function? callback)
+      BuildContext context, BaseArgs? args, Function(dynamic)? callback)
       : super.pushNamed(context, args, callback);
 
   @override
@@ -27,12 +27,13 @@ class MainScreenNav extends BaseNavigator {
   }
 
   @override
-  void navigator(BuildContext context, BaseArgs? args, Function? callback) {
+  void navigator(
+      BuildContext context, BaseArgs? args, Function(dynamic)? callback) {
     Navigator.pushNamed(
       context,
       route,
     ).then(
-      (_) => {if (callback != null) callback()},
+      (value) => {if (callback != null) callback(value)},
     );
   }
 }

@@ -5,11 +5,16 @@ import 'package:is_counter/route/base_args.dart';
 
 class CounterViewModel extends ChangeNotifier {
   final CounterController _counterController = CounterController();
-  final Counter _counter;
+  Counter _counter;
   Counter get counter => _counter;
   String get value => _counter.value.toString();
 
   CounterViewModel(this._counter);
+
+  void setNewCounter(Counter counter) {
+    _counter = counter;
+    notifyListeners();
+  }
 
   void incrementValue() {
     final value = _counter.value + _counter.incrementValue;

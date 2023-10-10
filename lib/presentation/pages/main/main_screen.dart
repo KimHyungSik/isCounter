@@ -28,13 +28,8 @@ class MainScreen extends StatelessWidget {
             (context.read<MainViewModel>().counterList.list.length + 1)
                 .toString(),
           );
-          AddCounterNav.pushNamed(
-            context,
-            args,
-            () {
-              context.read<MainViewModel>().getCounterList();
-            },
-          );
+          AddCounterNav.pushNamed(context, args,
+              (_) => context.read<MainViewModel>().getCounterList());
         },
       ).setEndNav(
         const Icon(Icons.more_horiz),
@@ -70,9 +65,7 @@ class MainScreen extends StatelessWidget {
           CounterNav.pushNamed(
             context,
             CounterViewModelArgs(counter),
-            () {
-              (_) => context.read<MainViewModel>().getCounterList();
-            },
+            (_) => context.read<MainViewModel>().getCounterList(),
           );
         },
       );

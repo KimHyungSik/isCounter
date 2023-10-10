@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 
 class CounterNav extends BaseNavigator<CounterViewModelArgs> {
   CounterNav.nav(super.settins) : super.nav();
-  CounterNav.pushNamed(
-      BuildContext context, CounterViewModelArgs? args, Function? callback)
+  CounterNav.pushNamed(BuildContext context, CounterViewModelArgs? args,
+      Function(dynamic)? callback)
       : super.pushNamed(context, args, callback);
 
   @override
@@ -29,10 +29,10 @@ class CounterNav extends BaseNavigator<CounterViewModelArgs> {
   }
 
   @override
-  void navigator(
-      BuildContext context, CounterViewModelArgs? args, Function? callback) {
+  void navigator(BuildContext context, CounterViewModelArgs? args,
+      Function(dynamic)? callback) {
     Navigator.pushNamed(context, route, arguments: args).then(
-      (_) => {if (callback != null) callback()},
+      (value) => {if (callback != null) callback(value)},
     );
   }
 }

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class CounterSettingNav extends BaseNavigator<CounterSettingViewModelArgs> {
   CounterSettingNav.nav(super.settins) : super.nav();
   CounterSettingNav.pushNamed(BuildContext context,
-      CounterSettingViewModelArgs args, Function? callback)
+      CounterSettingViewModelArgs args, Function(dynamic)? callback)
       : super.pushNamed(context, args, callback);
 
   @override
@@ -26,7 +26,8 @@ class CounterSettingNav extends BaseNavigator<CounterSettingViewModelArgs> {
 
   @override
   void navigator(BuildContext context, CounterSettingViewModelArgs? args,
-      Function? callback) {
-    Navigator.pushNamed(context, counterSetting, arguments: args);
+      Function(dynamic)? callback) {
+    Navigator.pushNamed(context, counterSetting, arguments: args)
+        .then((value) => callback?.call(value));
   }
 }

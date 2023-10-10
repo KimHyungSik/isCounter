@@ -4,7 +4,8 @@ import 'base_args.dart';
 
 abstract class BaseNavigator<T extends BaseArgs> {
   BaseNavigator.nav(RouteSettings this.settings);
-  BaseNavigator.pushNamed(BuildContext context, T? args, Function? callback) {
+  BaseNavigator.pushNamed(
+      BuildContext context, T? args, Function(dynamic)? callback) {
     navigator(context, args, callback);
   }
 
@@ -12,6 +13,6 @@ abstract class BaseNavigator<T extends BaseArgs> {
   String get route;
   RouteSettings? settings;
 
-  void navigator(BuildContext context, T? args, Function? callback);
+  void navigator(BuildContext context, T? args, Function(dynamic)? callback);
   MaterialPageRoute pageRoute();
 }
