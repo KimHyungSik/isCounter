@@ -65,7 +65,9 @@ class CounterSettingScreen extends StatelessWidget {
                       string(Localize.addCounterColorText),
                     ),
                     ColorPicker(
-                      selected: viewModel.counter.color,
+                      selected: context.select<CounterSettingViewModel, int>(
+                        (viewModel) => viewModel.counter.color,
+                      ),
                       onClick: (value) {
                         viewModel.selectColor(value);
                       },
