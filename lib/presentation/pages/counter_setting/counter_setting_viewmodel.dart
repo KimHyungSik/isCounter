@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/database/controller/counter_controller.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/database/model/counter/counter_method.dart';
+import 'package:is_counter/route/base_args.dart';
 
 class CounterSettingViewModel extends ChangeNotifier {
   final CounterController _counterController = CounterController();
@@ -43,7 +44,7 @@ class CounterSettingViewModel extends ChangeNotifier {
   }
 }
 
-class CounterSettingViewModelArgs {
+class CounterSettingViewModelArgs extends BaseArgs {
   final Counter counter;
 
   CounterSettingViewModelArgs(this.counter);

@@ -6,6 +6,7 @@ import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
 import 'package:is_counter/presentation/pages/counter/screen_counter.dart';
 import 'package:is_counter/presentation/pages/counter_setting/counter_setting_viewmodel.dart';
 import 'package:is_counter/presentation/widgets/color_picker.dart';
+import 'package:is_counter/route/navigators/counter_settings_navigator.dart';
 import 'package:is_counter/route/route.dart';
 import 'package:provider/provider.dart';
 
@@ -25,12 +26,11 @@ class CounterScreen extends StatelessWidget {
           .setEndNav(
             const Icon(Icons.more_horiz),
             () => {
-              Navigator.pushNamed(
+              CounterSettingNav.pushNamed(
                 context,
-                counterSetting,
-                arguments: CounterSettingViewModelArgs(
-                  context.read<CounterViewModel>().counter,
-                ),
+                CounterSettingViewModelArgs(
+                    context.read<CounterViewModel>().counter),
+                () {},
               )
             },
           )
