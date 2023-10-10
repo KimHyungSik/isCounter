@@ -15,11 +15,11 @@ class ColorPicker extends StatelessWidget {
   ColorPicker({
     super.key,
     this.selected = 0,
-    required this.click,
+    required this.onClick,
   });
 
   final int selected;
-  final void Function(int) click;
+  final void Function(int) onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ColorPicker extends StatelessWidget {
           flex: 1,
           child: GestureDetector(
             onTap: () {
-              click(entry.key);
+              onClick(entry.key);
             },
             child: Container(
               decoration: BoxDecoration(

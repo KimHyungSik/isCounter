@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/common/localization.dart';
 import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
-import 'package:is_counter/presentation/widgets/counter_text_field.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_itme_description.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_save_button.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_text_field.dart';
 import 'package:is_counter/presentation/widgets/method_radio.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/model/counter/counter_method.dart';
 import '../../widgets/color_picker.dart';
-import '../../widgets/counter_itme_description.dart';
 
 class AddCounterScreen extends StatelessWidget {
   final FocusNode fieldTitle = FocusNode(),
@@ -26,80 +27,49 @@ class AddCounterScreen extends StatelessWidget {
             string(Localize.addCounterTitle),
           )
           .build(),
-      body: LayoutBuilder(builder: (context, constraint) {
-        return SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraint.maxHeight),
-            child: IntrinsicHeight(
-              child: Column(
-                children: [
-                  _paddedColumn(context),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  _selectedMethod(
-                    context,
-                    (method) {
-                      context
-                          .read<AddCounterViewModel>()
-                          .setMethodValue(method);
-                    },
-                  ),
-                  const Spacer(),
-                  _saveButton(
-                    context,
-                    () {
-                      context.read<AddCounterViewModel>().saveCounter().then(
-                        (value) {
-                          if (value) {
-                            Navigator.pop(context);
-                          }
-                        },
-                      );
-                    },
-                    Localize.save,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  )
-                ],
+      body: LayoutBuilder(
+        builder: (context, constraint) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    _paddedColumn(context),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    _selectedMethod(
+                      context,
+                      (method) {
+                        context
+                            .read<AddCounterViewModel>()
+                            .setMethodValue(method);
+                      },
+                    ),
+                    const Spacer(),
+                    saveButton(
+                      context,
+                      () {
+                        context.read<AddCounterViewModel>().saveCounter().then(
+                          (value) {
+                            if (value) {
+                              Navigator.pop(context);
+                            }
+                          },
+                        );
+                      },
+                      Localize.save,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      }),
-    );
-  }
-
-  Widget _saveButton(
-    BuildContext context,
-    Function() onClick,
-    Localize localize,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-      child: TextButton(
-        onPressed: () => onClick(),
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-        ),
-        child: Container(
-          height: 50,
-          width: double.infinity,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(8)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                string(localize),
-                style: const TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -112,6 +82,9 @@ class AddCounterScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(
+            height: 16,
+          ),
           counterItemDescription(
             string(Localize.addCounterTitleDescription),
           ),
@@ -178,7 +151,7 @@ class AddCounterScreen extends StatelessWidget {
     return ColorPicker(
       selected: context
           .select<AddCounterViewModel, int>((value) => value.selectedColor),
-      click: (select) => onClick(select),
+      onClick: (select) => onClick(select),
     );
   }
 
@@ -213,7 +186,7 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                _saveButton(context, () {
+                saveButton(context, () {
                   Navigator.pop(context);
                   _showMethodBottomSheet(context);
                 }, Localize.next),
@@ -254,7 +227,7 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                _saveButton(
+                saveButton(
                   context,
                   () {
                     Navigator.pop(context);

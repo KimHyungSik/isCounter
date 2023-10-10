@@ -13,19 +13,22 @@ class MethodRaido extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        methodRadioListTile(
-          string(Localize.addCounterButtonMethod),
-          Method.BUTTON,
-          context,
-        ),
-        methodRadioListTile(
-          string(Localize.addCounterScreenMethod),
-          Method.SCREEN,
-          context,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Column(
+        children: [
+          methodRadioListTile(
+            string(Localize.addCounterButtonMethod),
+            Method.BUTTON,
+            context,
+          ),
+          methodRadioListTile(
+            string(Localize.addCounterScreenMethod),
+            Method.SCREEN,
+            context,
+          ),
+        ],
+      ),
     );
   }
 
