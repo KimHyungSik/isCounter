@@ -140,6 +140,16 @@ class S {
     );
   }
 
+  /// `터치 시 진동`
+  String get counter_vibration_settings {
+    return Intl.message(
+      '터치 시 진동',
+      name: 'counter_vibration_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Confirm`
   String get bottom_sheet_confirm {
     return Intl.message(

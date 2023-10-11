@@ -13,6 +13,7 @@ enum Localize {
   addCounterButtonMethod("add_counter_button_method"),
   addCounterScreenMethod("add_counter_screen_method"),
   bottomSheetConfirm("bottom_sheet_confirm"),
+  counterVibrationSettings("counter_vibration_settings"),
   save("save"),
   next("next");
 

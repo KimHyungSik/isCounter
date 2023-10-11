@@ -8,6 +8,7 @@
     "add_counter_method" : "카운터 방법",
     "add_counter_button_method" : "버튼 방식",
     "add_counter_screen_method" : "화면 터치 방식",
+    "counter_vibration_settings" : "터치 시 진동",
     "bottom_sheet_confirm" : "완료",
     "save" : "저장하기",
     "next" : "다음"

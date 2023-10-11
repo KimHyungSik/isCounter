@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Counter Name"),
         "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "counter": MessageLookupByLibrary.simpleMessage("Counter"),
+        "counter_vibration_settings":
+            MessageLookupByLibrary.simpleMessage("터치 시 진동"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "save": MessageLookupByLibrary.simpleMessage("Save")
       };

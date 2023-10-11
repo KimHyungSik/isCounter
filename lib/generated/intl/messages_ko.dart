@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("카운터 명"),
         "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("완료"),
         "counter": MessageLookupByLibrary.simpleMessage("카운터"),
+        "counter_vibration_settings":
+            MessageLookupByLibrary.simpleMessage("터치 시 진동"),
         "next": MessageLookupByLibrary.simpleMessage("다음"),
         "save": MessageLookupByLibrary.simpleMessage("저장하기")
       };
