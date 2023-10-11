@@ -31,6 +31,9 @@ class AddCounterViewModel extends ChangeNotifier {
   Method _method = Method.BUTTON;
   Method get method => _method;
 
+  bool _vibration = true;
+  bool get vibration => _vibration;
+
   void selectColor(int select) {
     _selectedColor = select;
     notifyListeners();
@@ -56,6 +59,11 @@ class AddCounterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setVibration(bool? vibration) {
+    _vibration = vibration ?? true;
+    notifyListeners();
+  }
+
   Future<bool> saveCounter() async {
     Counter counter = Counter(
         id: const Uuid().v4(),
@@ -64,6 +72,7 @@ class AddCounterViewModel extends ChangeNotifier {
         value: startValue,
         startValue: startValue,
         incrementValue: incrementValue,
+        vibration: vibration,
         counterMethod: _method);
 
     return await _counterController.addCounter(null, counter);

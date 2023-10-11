@@ -9,6 +9,7 @@ class Counter {
   int value;
   int startValue;
   int incrementValue;
+  bool vibration;
   Method counterMethod;
 
   Counter({
@@ -18,6 +19,7 @@ class Counter {
     required this.value,
     required this.startValue,
     required this.incrementValue,
+    required this.vibration,
     required this.counterMethod,
   });
 
@@ -29,6 +31,7 @@ class Counter {
       'value': value,
       'startValue': startValue,
       'incrementValue': incrementValue,
+      'vibration': vibration,
       'counterMethod': counterMethod.toJson(),
     };
   }
@@ -41,6 +44,7 @@ class Counter {
       value: json['value'],
       startValue: json['startValue'],
       incrementValue: json['incrementValue'],
+      vibration: json['vibration'] ?? true,
       counterMethod: Method.fromJson(json['counterMethod']),
     );
   }
