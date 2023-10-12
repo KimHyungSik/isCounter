@@ -47,7 +47,9 @@ Widget buttonCounter(BuildContext context, Color counterColor) {
                   const Icon(Icons.remove),
                   counterColor,
                   () {
-                    HapticFeedback.lightImpact();
+                    if (context.read<CounterViewModel>().counter.vibration) {
+                      HapticFeedback.lightImpact();
+                    }
                     context.read<CounterViewModel>().decrementValue();
                   },
                 ),
@@ -63,7 +65,9 @@ Widget buttonCounter(BuildContext context, Color counterColor) {
                   const Icon(Icons.add),
                   counterColor,
                   () {
-                    HapticFeedback.lightImpact();
+                    if (context.read<CounterViewModel>().counter.vibration) {
+                      HapticFeedback.lightImpact();
+                    }
                     context.read<CounterViewModel>().incrementValue();
                   },
                 ),
