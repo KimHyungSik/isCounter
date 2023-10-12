@@ -1,6 +1,6 @@
 enum Method {
-  BUTTON,
-  SCREEN;
+  button,
+  screen;
 
   String toJson() => name;
   static Method fromJson(String json) => values.byName(json);

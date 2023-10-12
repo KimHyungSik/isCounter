@@ -54,8 +54,8 @@ class CounterScreen extends StatelessWidget {
 
   Widget _counterFactory(BuildContext context, Color counterColor) {
     return switch (context.read<CounterViewModel>().counter.counterMethod) {
-      Method.BUTTON => buttonCounter(context, counterColor),
-      Method.SCREEN => screenTouchCounter(context, counterColor)
+      Method.button => buttonCounter(context, counterColor),
+      Method.screen => screenTouchCounter(context, counterColor)
     };
   }
 }

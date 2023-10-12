@@ -22,7 +22,7 @@ class AddCounterViewModel extends ChangeNotifier {
   int _selectedColor = 0;
   int get selectedColor => _selectedColor;
 
-  Method _method = Method.BUTTON;
+  Method _method = Method.button;
   Method get method => _method;
 
   bool _vibration = true;
