@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:is_counter/common/localization.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/pages/counter/counter_viewmodel.dart';
@@ -21,22 +22,30 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder().setEndIcon(
-        const Icon(Icons.add),
-        () {
-          final args = AddCounterViewModelArgs(
-            (context.read<MainViewModel>().counterList.list.length + 1)
-                .toString(),
-          );
-          AddCounterNav.pushNamed(context, args,
-              (_) => context.read<MainViewModel>().getCounterList());
-        },
-      ).setEndNav(
-        const Icon(Icons.more_horiz),
-        () {
-          context.read<MainViewModel>().changeMode();
-        },
-      ).build(),
+      appBar: AppBarBuilder()
+          .setEndIcon(
+            const Icon(Icons.add),
+            () {
+              final args = AddCounterViewModelArgs(
+                (context.read<MainViewModel>().counterList.list.length + 1)
+                    .toString(),
+              );
+              AddCounterNav.pushNamed(context, args,
+                  (_) => context.read<MainViewModel>().getCounterList());
+            },
+          )
+          .setEndNav(
+            const Icon(Icons.more_horiz),
+            () {
+              context.read<MainViewModel>().changeMode();
+            },
+          )
+          .setTitle(
+            string(
+              Localize.appTitle,
+            ),
+          )
+          .build(),
       body: Selector<MainViewModel, Tuple2<MainState, MainMode>>(
         selector: (context, viewModel) =>
             Tuple2(viewModel.state, viewModel.mode),

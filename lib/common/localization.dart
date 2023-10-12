@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 String string(Localize localize) => Intl.message(localize.key);
 
 enum Localize {
+  appTitle("app_title"),
   counter("counter"),
   addCounterTitle("add_counter_title"),
   addCounterTitleDescription("add_counter_title_description"),

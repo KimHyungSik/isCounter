@@ -42,7 +42,13 @@ class AppBarBuilder {
   // Build the custom AppBar
   AppBar build() {
     return AppBar(
-      title: _title != null ? Text(_title!) : null,
+      centerTitle: true,
+      title: _title != null
+          ? Text(
+              _title!,
+              textAlign: TextAlign.center,
+            )
+          : null,
       actions: [
         if (_endIcon != null)
           IconButton(
