@@ -28,14 +28,14 @@ class MainViewModel extends ChangeNotifier {
   }
 
   void incrementValue(Counter counter) {
-    final value = counter.value + counter.incrementValue;
+    final value = counter.value + 1;
     counter.value = value;
     _counterController.modifyCounter(counterList, counter);
     notifyListeners();
   }
 
   void decrementValue(Counter counter) {
-    final value = counter.value - counter.incrementValue;
+    final value = counter.value - 1;
     counter.value = value;
     _counterController.modifyCounter(counterList, counter);
     notifyListeners();

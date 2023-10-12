@@ -23,16 +23,6 @@ class CounterSettingViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setIncrementValue(int incrementValue) {
-    counter.incrementValue = incrementValue;
-    notifyListeners();
-  }
-
-  void setStartValue(int startValue) {
-    counter.startValue = startValue;
-    notifyListeners();
-  }
-
   void setMethodValue(Method method) {
     counter.counterMethod = method;
     notifyListeners();

@@ -19,12 +19,6 @@ class AddCounterViewModel extends ChangeNotifier {
 
   String get title => _title;
 
-  int _startValue = 0;
-  int get startValue => _startValue;
-
-  int _incrementValue = 1;
-  int get incrementValue => _incrementValue;
-
   int _selectedColor = 0;
   int get selectedColor => _selectedColor;
 
@@ -44,16 +38,6 @@ class AddCounterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setIncrementValue(int incrementValue) {
-    _incrementValue = incrementValue;
-    notifyListeners();
-  }
-
-  void setStartValue(int startValue) {
-    _startValue = startValue;
-    notifyListeners();
-  }
-
   void setMethodValue(Method method) {
     _method = method;
     notifyListeners();
@@ -69,9 +53,7 @@ class AddCounterViewModel extends ChangeNotifier {
         id: const Uuid().v4(),
         title: title,
         color: selectedColor,
-        value: startValue,
-        startValue: startValue,
-        incrementValue: incrementValue,
+        value: 0,
         vibration: vibration,
         counterMethod: _method);
 

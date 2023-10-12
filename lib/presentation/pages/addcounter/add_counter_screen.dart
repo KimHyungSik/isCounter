@@ -110,29 +110,6 @@ class AddCounterScreen extends StatelessWidget {
                 FocusScope.of(context).requestFocus(fieldStartPoint),
           ),
           counterItemDescription(
-            string(Localize.addCounterStartPoint),
-          ),
-          counterTextField(
-            context,
-            focusNode: fieldStartPoint,
-            controllerTitle: viewModel.startValue.toString(),
-            onChanged: (value) => viewModel.setStartValue(int.parse(value)),
-            onSubmitted: (_) =>
-                FocusScope.of(context).requestFocus(fieldIncreaseValue),
-            keyboardType: TextInputType.number,
-          ),
-          counterItemDescription(
-            string(Localize.addCounterIncreaseValue),
-          ),
-          counterTextField(
-            context,
-            focusNode: fieldIncreaseValue,
-            controllerTitle: viewModel.incrementValue.toString(),
-            onChanged: (value) => viewModel.setIncrementValue(int.parse(value)),
-            onSubmitted: (_) => _showColorPickerBottomSheet(context),
-            keyboardType: TextInputType.number,
-          ),
-          counterItemDescription(
             string(Localize.addCounterColorText),
           ),
           _selectedColor(

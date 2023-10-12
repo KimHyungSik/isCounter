@@ -17,14 +17,14 @@ class CounterViewModel extends ChangeNotifier {
   }
 
   void incrementValue() {
-    final value = _counter.value + _counter.incrementValue;
+    final value = _counter.value + 1;
     _counter.value = value;
     _counterController.modifyCounter(null, _counter);
     notifyListeners();
   }
 
   void decrementValue() {
-    final value = counter.value - counter.incrementValue;
+    final value = counter.value - 1;
     counter.value = value;
     _counterController.modifyCounter(null, counter);
     notifyListeners();

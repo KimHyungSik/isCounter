@@ -7,8 +7,6 @@ class Counter {
   String title;
   int color;
   int value;
-  int startValue;
-  int incrementValue;
   bool vibration;
   Method counterMethod;
 
@@ -17,8 +15,6 @@ class Counter {
     required this.title,
     required this.color,
     required this.value,
-    required this.startValue,
-    required this.incrementValue,
     required this.vibration,
     required this.counterMethod,
   });
@@ -29,8 +25,6 @@ class Counter {
       'title': title,
       'color': color,
       'value': value,
-      'startValue': startValue,
-      'incrementValue': incrementValue,
       'vibration': vibration,
       'counterMethod': counterMethod.toJson(),
     };
@@ -42,8 +36,6 @@ class Counter {
       title: json['title'],
       color: json['color'],
       value: json['value'],
-      startValue: json['startValue'],
-      incrementValue: json['incrementValue'],
       vibration: json['vibration'] ?? true,
       counterMethod: Method.fromJson(json['counterMethod']),
     );

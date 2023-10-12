@@ -43,25 +43,6 @@ class CounterSettingScreen extends StatelessWidget {
                       onChanged: viewModel.setTitle,
                     ),
                     counterItemDescription(
-                      string(Localize.addCounterStartPoint),
-                    ),
-                    counterTextField(
-                      context,
-                      controllerTitle: viewModel.counter.startValue.toString(),
-                      onChanged: (value) =>
-                          viewModel.setStartValue(int.parse(value)),
-                    ),
-                    counterItemDescription(
-                      string(Localize.addCounterIncreaseValue),
-                    ),
-                    counterTextField(
-                      context,
-                      controllerTitle:
-                          viewModel.counter.incrementValue.toString(),
-                      onChanged: (value) =>
-                          viewModel.setIncrementValue(int.parse(value)),
-                    ),
-                    counterItemDescription(
                       string(Localize.addCounterColorText),
                     ),
                     ColorPicker(
