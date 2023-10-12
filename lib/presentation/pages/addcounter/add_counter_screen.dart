@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/common/localization.dart';
 import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_checkbox.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_itme_description.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_save_button.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_text_field.dart';
@@ -46,6 +47,18 @@ class AddCounterScreen extends StatelessWidget {
                             .read<AddCounterViewModel>()
                             .setMethodValue(method);
                       },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    counterCheckBox(
+                      context,
+                      string(Localize.counterVibrationSettings),
+                      value: context.select<AddCounterViewModel, bool>(
+                        (viewModel) => viewModel.vibration,
+                      ),
+                      onChanged:
+                          context.read<AddCounterViewModel>().setVibration,
                     ),
                     const Spacer(),
                     saveButton(
