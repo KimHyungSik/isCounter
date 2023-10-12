@@ -11,7 +11,12 @@ class CounterSettingViewModel extends ChangeNotifier {
   String get title => _args.counter.title;
   Counter get counter => _args.counter;
 
-  CounterSettingViewModel(this._args);
+  CounterSettingViewModel(this._args) {
+    _vibration = _args.counter.vibration;
+  }
+
+  late bool _vibration;
+  bool get vibration => _vibration;
 
   void selectColor(int select) {
     counter.color = select;
@@ -25,6 +30,11 @@ class CounterSettingViewModel extends ChangeNotifier {
 
   void setMethodValue(Method method) {
     counter.counterMethod = method;
+    notifyListeners();
+  }
+
+  void setVibration(bool? vibration) {
+    counter.vibration = vibration ?? true;
     notifyListeners();
   }
 
