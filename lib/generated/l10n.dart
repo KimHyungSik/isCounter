@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `isCounter`
+  String get app_title {
+    return Intl.message(
+      'isCounter',
+      name: 'app_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Counter`
   String get counter {
     return Intl.message(

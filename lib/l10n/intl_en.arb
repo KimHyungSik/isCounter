@@ -1,4 +1,5 @@
 {
+    "app_title" : "isCounter",
     "counter" : "Counter",
     "add_counter_title": "new Counter",
     "add_counter_title_description": "Counter Name",

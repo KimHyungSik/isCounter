@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("new Counter"),
         "add_counter_title_description":
             MessageLookupByLibrary.simpleMessage("Counter Name"),
+        "app_title": MessageLookupByLibrary.simpleMessage("isCounter"),
         "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "counter": MessageLookupByLibrary.simpleMessage("Counter"),
         "counter_vibration_settings":
