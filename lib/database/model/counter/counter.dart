@@ -9,6 +9,7 @@ class Counter {
   int value;
   bool vibration;
   Method counterMethod;
+  List<String> tags = <String>[];
 
   Counter({
     required this.id,
@@ -17,6 +18,7 @@ class Counter {
     required this.value,
     required this.vibration,
     required this.counterMethod,
+    required this.tags,
   });
 
   Map<String, dynamic> toJson() {
@@ -27,6 +29,7 @@ class Counter {
       'value': value,
       'vibration': vibration,
       'counterMethod': counterMethod.toJson(),
+      'tags': tags.toList()
     };
   }
 
@@ -38,6 +41,7 @@ class Counter {
       value: json['value'],
       vibration: json['vibration'] ?? true,
       counterMethod: Method.fromJson(json['counterMethod']),
+      tags: List<String>.from(json['tags']),
     );
   }
 }

@@ -131,16 +131,32 @@ class AddCounterScreen extends StatelessWidget {
               crossAxisSpacing: 6,
               children: List.generate(
                 CounterTags.values.length,
-                (index) => Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                    color: lightContainerBackgroundColor,
-                  ),
-                  width: 30,
-                  height: 30,
-                  child: Icon(CounterTags.values[index].icon),
+                (index) => GestureDetector(
+                  onTap: () {
+                    context.read<AddCounterViewModel>().updateTags(
+                          CounterTags.values[index].name,
+                        );
+                  },
+                  child: Selector<AddCounterViewModel, bool>(
+                      selector: (context, viewModel) => viewModel.tags.contains(
+                            CounterTags.values[index].name,
+                          ),
+                      builder: (context, isSelected, __) {
+                        final backgroundColor = isSelected
+                            ? Theme.of(context).dividerColor
+                            : lightContainerBackgroundColor;
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                            color: backgroundColor,
+                          ),
+                          width: 30,
+                          height: 30,
+                          child: Icon(CounterTags.values[index].icon),
+                        );
+                      }),
                 ),
               ),
             ),

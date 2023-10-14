@@ -28,6 +28,9 @@ class AddCounterViewModel extends ChangeNotifier {
   bool _vibration = true;
   bool get vibration => _vibration;
 
+  Set<String> _tags = {};
+  Set<String> get tags => _tags;
+
   void selectColor(int select) {
     _selectedColor = select;
     notifyListeners();
@@ -48,14 +51,25 @@ class AddCounterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateTags(String tag) {
+    if (_tags.contains(tag)) {
+      _tags.remove(tag);
+    } else {
+      _tags.add(tag);
+    }
+    notifyListeners();
+  }
+
   Future<bool> saveCounter() async {
     Counter counter = Counter(
-        id: const Uuid().v4(),
-        title: title,
-        color: selectedColor,
-        value: 0,
-        vibration: vibration,
-        counterMethod: _method);
+      id: const Uuid().v4(),
+      title: title,
+      color: selectedColor,
+      value: 0,
+      vibration: vibration,
+      counterMethod: _method,
+      tags: _tags.toList(),
+    );
 
     return await _counterController.addCounter(null, counter);
   }
