@@ -19,12 +19,12 @@ class MethodRaido extends StatelessWidget {
         children: [
           methodRadioListTile(
             string(Localize.addCounterButtonMethod),
-            Method.BUTTON,
+            Method.button,
             context,
           ),
           methodRadioListTile(
             string(Localize.addCounterScreenMethod),
-            Method.SCREEN,
+            Method.screen,
             context,
           ),
         ],
