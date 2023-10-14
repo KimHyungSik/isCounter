@@ -15,6 +15,7 @@ enum Localize {
   addCounterScreenMethod("add_counter_screen_method"),
   bottomSheetConfirm("bottom_sheet_confirm"),
   counterVibrationSettings("counter_vibration_settings"),
+  counterIcon("counter_icon"),
   save("save"),
   next("next");
 
