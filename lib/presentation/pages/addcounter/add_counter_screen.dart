@@ -142,8 +142,9 @@ class AddCounterScreen extends StatelessWidget {
                           viewModel.tag == CounterTags.values[index].name,
                       builder: (context, isSelected, __) {
                         final backgroundColor = isSelected
-                            ? Theme.of(context).dividerColor
+                            ? darkGray
                             : lightContainerBackgroundColor;
+                        final iconColor = isSelected ? Colors.white : gray;
                         return Container(
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.all(
@@ -153,7 +154,10 @@ class AddCounterScreen extends StatelessWidget {
                           ),
                           width: 30,
                           height: 30,
-                          child: Icon(CounterTags.values[index].icon),
+                          child: Icon(
+                            CounterTags.values[index].icon,
+                            color: iconColor,
+                          ),
                         );
                       }),
                 ),
