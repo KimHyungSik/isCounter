@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/common/localization.dart';
+import 'package:is_counter/database/model/tags/tags.dart';
 import 'package:is_counter/presentation/pages/addcounter/add_counter_viewmodel.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_checkbox.dart';
@@ -7,6 +8,7 @@ import 'package:is_counter/presentation/widgets/counter/counter_itme_description
 import 'package:is_counter/presentation/widgets/counter/counter_save_button.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_text_field.dart';
 import 'package:is_counter/presentation/widgets/method_radio.dart';
+import 'package:is_counter/theme/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/model/counter/counter_method.dart';
@@ -118,6 +120,31 @@ class AddCounterScreen extends StatelessWidget {
               context.read<AddCounterViewModel>().selectColor(select);
             },
           ),
+          const SizedBox(
+            height: 16,
+          ),
+          SizedBox(
+            height: 150,
+            child: GridView.count(
+              crossAxisCount: 6,
+              mainAxisSpacing: 6,
+              crossAxisSpacing: 6,
+              children: List.generate(
+                CounterTags.values.length,
+                (index) => Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                    color: lightContainerBackgroundColor,
+                  ),
+                  width: 30,
+                  height: 30,
+                  child: Icon(CounterTags.values[index].icon),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
