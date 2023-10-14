@@ -28,8 +28,8 @@ class AddCounterViewModel extends ChangeNotifier {
   bool _vibration = true;
   bool get vibration => _vibration;
 
-  Set<String> _tags = {};
-  Set<String> get tags => _tags;
+  String? _tag;
+  String? get tag => _tag;
 
   void selectColor(int select) {
     _selectedColor = select;
@@ -52,10 +52,10 @@ class AddCounterViewModel extends ChangeNotifier {
   }
 
   void updateTags(String tag) {
-    if (_tags.contains(tag)) {
-      _tags.remove(tag);
+    if (_tag == tag) {
+      _tag = null;
     } else {
-      _tags.add(tag);
+      _tag = tag;
     }
     notifyListeners();
   }
@@ -68,7 +68,7 @@ class AddCounterViewModel extends ChangeNotifier {
       value: 0,
       vibration: vibration,
       counterMethod: _method,
-      tags: _tags.toList(),
+      tag: _tag,
     );
 
     return await _counterController.addCounter(null, counter);

@@ -138,9 +138,8 @@ class AddCounterScreen extends StatelessWidget {
                         );
                   },
                   child: Selector<AddCounterViewModel, bool>(
-                      selector: (context, viewModel) => viewModel.tags.contains(
-                            CounterTags.values[index].name,
-                          ),
+                      selector: (context, viewModel) =>
+                          viewModel.tag == CounterTags.values[index].name,
                       builder: (context, isSelected, __) {
                         final backgroundColor = isSelected
                             ? Theme.of(context).dividerColor

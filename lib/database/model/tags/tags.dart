@@ -35,4 +35,5 @@ enum CounterTags {
 
   String toJson() => name;
   static CounterTags fromJson(String json) => values.byName(json);
+  static IconData nameToIcon(String name) => values.byName(name).icon;
 }

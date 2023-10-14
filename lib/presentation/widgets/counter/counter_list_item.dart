@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
+import 'package:is_counter/database/model/tags/tags.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:is_counter/presentation/widgets/color_picker.dart';
 import 'package:provider/provider.dart';
@@ -34,9 +35,23 @@ class CounterListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  counter.title,
-                  style: const TextStyle(fontSize: 18),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (counter.tag != null)
+                        Icon(
+                          CounterTags.nameToIcon(counter.tag!),
+                          size: 20.0,
+                        ),
+                      Text(
+                        counter.title,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   children: [
