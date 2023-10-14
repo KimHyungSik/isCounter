@@ -40,9 +40,7 @@ class MethodRaido extends StatelessWidget {
           color: lightContainerBackgroundColor,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: selected == value
-                ? Theme.of(context).dividerColor
-                : lightContainerBackgroundColor,
+            color: selected == value ? gray : lightContainerBackgroundColor,
             width: 2,
           ),
         ),
@@ -55,6 +53,7 @@ class MethodRaido extends StatelessWidget {
               onChanged(value);
             }
           },
+          activeColor: gray,
         ),
       ),
     );
