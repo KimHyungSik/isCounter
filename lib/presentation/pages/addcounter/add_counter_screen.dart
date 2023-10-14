@@ -37,10 +37,18 @@ class AddCounterScreen extends StatelessWidget {
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
               child: IntrinsicHeight(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _paddedColumn(context),
                     const SizedBox(
-                      height: 16,
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: counterItemDescription(
+                        string(Localize.addCounterButtonMethod),
+                      ),
                     ),
                     _selectedMethod(
                       context,
@@ -51,7 +59,7 @@ class AddCounterScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 20,
                     ),
                     counterCheckBox(
                       context,
@@ -61,6 +69,9 @@ class AddCounterScreen extends StatelessWidget {
                       ),
                       onChanged:
                           context.read<AddCounterViewModel>().setVibration,
+                    ),
+                    const SizedBox(
+                      height: 32,
                     ),
                     const Spacer(),
                     saveButton(
@@ -98,7 +109,7 @@ class AddCounterScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 16,
+            height: 20,
           ),
           counterItemDescription(
             string(Localize.addCounterTitleDescription),
@@ -111,6 +122,9 @@ class AddCounterScreen extends StatelessWidget {
             onSubmitted: (_) =>
                 FocusScope.of(context).requestFocus(fieldStartPoint),
           ),
+          const SizedBox(
+            height: 20,
+          ),
           counterItemDescription(
             string(Localize.addCounterColorText),
           ),
@@ -121,7 +135,10 @@ class AddCounterScreen extends StatelessWidget {
             },
           ),
           const SizedBox(
-            height: 16,
+            height: 20,
+          ),
+          counterItemDescription(
+            string(Localize.counterIcon),
           ),
           SizedBox(
             height: 150,
