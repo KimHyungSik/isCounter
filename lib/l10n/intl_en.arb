@@ -11,6 +11,7 @@
     "add_counter_screen_method": "Screen Touch Method",
     "counter_vibration_settings" : "터치 시 진동",
     "bottom_sheet_confirm": "Confirm",
+    "counter_icon" : "카운터 아이콘",
     "save": "Save",
     "next": "Next"
 }

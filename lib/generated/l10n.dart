@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `카운터 아이콘`
+  String get counter_icon {
+    return Intl.message(
+      '카운터 아이콘',
+      name: 'counter_icon',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Save`
   String get save {
     return Intl.message(

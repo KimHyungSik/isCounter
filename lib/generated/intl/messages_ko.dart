@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_title": MessageLookupByLibrary.simpleMessage("isCounter"),
         "bottom_sheet_confirm": MessageLookupByLibrary.simpleMessage("완료"),
         "counter": MessageLookupByLibrary.simpleMessage("카운터"),
+        "counter_icon": MessageLookupByLibrary.simpleMessage("카운터 아이콘"),
         "counter_vibration_settings":
             MessageLookupByLibrary.simpleMessage("터치 시 진동"),
         "next": MessageLookupByLibrary.simpleMessage("다음"),
