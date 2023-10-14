@@ -30,21 +30,24 @@ class CounterListRemoveItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IntrinsicWidth(
-                child: TextField(
-                  controller: TextEditingController(
-                    text: counter.title,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: TextField(
+                    controller: TextEditingController(
+                      text: counter.title,
+                    ),
+                    style: const TextStyle(fontSize: 18),
+                    decoration: const InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(0),
+                      border: InputBorder.none,
+                    ),
+                    maxLines: 1,
+                    onChanged: (value) {
+                      counter.title = value;
+                      viewModel.changeTitle(counter);
+                    },
                   ),
-                  style: const TextStyle(fontSize: 18),
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  maxLines: 1,
-                  onChanged: (value) {
-                    counter.title = value;
-                    viewModel.changeTitle(counter);
-                  },
                 ),
               ),
               Row(

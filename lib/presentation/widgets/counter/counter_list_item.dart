@@ -46,6 +46,9 @@ class CounterListItem extends StatelessWidget {
                           CounterTags.nameToIcon(counter.tag!),
                           size: 20.0,
                         ),
+                      const SizedBox(
+                        width: 2,
+                      ),
                       Text(
                         counter.title,
                         style: const TextStyle(fontSize: 18),
