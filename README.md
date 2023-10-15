@@ -1,2 +1,1 @@
-# is_counter
-
+Flutter로 만드는 카운터앱
