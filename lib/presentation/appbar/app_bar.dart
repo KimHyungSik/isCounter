@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:is_counter/common/style/TextStyle.dart';
 
 class AppBarBuilder {
   String? _title;
@@ -74,6 +75,7 @@ class AppBarBuilder {
           ? Text(
               _title!,
               textAlign: TextAlign.center,
+              style: boldTextStyle,
             )
           : null,
       actions: [

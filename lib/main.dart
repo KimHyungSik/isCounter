@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.light().copyWith(
+      theme: ThemeData(
         primaryColor: lightPrimaryColor,
         scaffoldBackgroundColor: lightBackgroundColor,
         dividerColor: lightDividerColor,
@@ -27,11 +27,7 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        primaryColor: darkPrimaryColor,
-        scaffoldBackgroundColor: darkBackgroundColor,
-        dividerColor: darkDividerColor,
+        fontFamily: "GmarketSans",
       ),
       themeMode: ThemeMode.system,
       localizationsDelegates: const [
