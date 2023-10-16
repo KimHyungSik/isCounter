@@ -16,13 +16,29 @@ class AppBarBuilder {
     return this;
   }
 
-  AppBarBuilder setEndIcon(Widget icon, Function() action) {
-    _endIconButton = IconButton(onPressed: action, icon: icon);
+  AppBarBuilder setEndIcon(
+    Widget icon,
+    Function() action, {
+    Color highlightColor = Colors.transparent,
+  }) {
+    _endIconButton = IconButton(
+      onPressed: action,
+      icon: icon,
+      highlightColor: highlightColor,
+    );
     return this;
   }
 
-  AppBarBuilder setEndNav(Widget icon, Function() action) {
-    _endNavButton = IconButton(onPressed: action, icon: icon);
+  AppBarBuilder setEndNav(
+    Widget icon,
+    Function() action, {
+    Color highlightColor = Colors.transparent,
+  }) {
+    _endNavButton = IconButton(
+      onPressed: action,
+      icon: icon,
+      highlightColor: highlightColor,
+    );
     return this;
   }
 
@@ -36,8 +52,16 @@ class AppBarBuilder {
     return this;
   }
 
-  AppBarBuilder setLeading(Widget icon, Function() action) {
-    _leadingIconButton = IconButton(onPressed: action, icon: icon);
+  AppBarBuilder setLeading(
+    Widget icon,
+    Function() action, {
+    Color highlightColor = Colors.transparent,
+  }) {
+    _leadingIconButton = IconButton(
+      onPressed: action,
+      icon: icon,
+      highlightColor: highlightColor,
+    );
     return this;
   }
 
