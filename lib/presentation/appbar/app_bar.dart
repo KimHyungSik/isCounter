@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 
 class AppBarBuilder {
   String? _title;
-  Icon? _endIcon;
-  Function()? _endIconAction;
-  Icon? _endNav;
-  Function()? _endNavAction;
+  IconButton? _endNavButton;
+  IconButton? _endIconButton;
+  IconButton? _leadingIconButton;
   Color? _color;
   double _elevation = 4.0;
 
@@ -17,15 +16,13 @@ class AppBarBuilder {
     return this;
   }
 
-  AppBarBuilder setEndIcon(Icon icon, Function() action) {
-    _endIcon = icon;
-    _endIconAction = action;
+  AppBarBuilder setEndIcon(Widget icon, Function() action) {
+    _endIconButton = IconButton(onPressed: action, icon: icon);
     return this;
   }
 
-  AppBarBuilder setEndNav(Icon icon, Function() action) {
-    _endNav = icon;
-    _endNavAction = action;
+  AppBarBuilder setEndNav(Widget icon, Function() action) {
+    _endNavButton = IconButton(onPressed: action, icon: icon);
     return this;
   }
 
@@ -39,9 +36,15 @@ class AppBarBuilder {
     return this;
   }
 
+  AppBarBuilder setLeading(Widget icon, Function() action) {
+    _leadingIconButton = IconButton(onPressed: action, icon: icon);
+    return this;
+  }
+
   // Build the custom AppBar
   AppBar build() {
     return AppBar(
+      leading: _leadingIconButton,
       centerTitle: true,
       title: _title != null
           ? Text(
@@ -50,16 +53,8 @@ class AppBarBuilder {
             )
           : null,
       actions: [
-        if (_endIcon != null)
-          IconButton(
-            icon: _endIcon!,
-            onPressed: _endIconAction,
-          ),
-        if (_endNav != null)
-          IconButton(
-            icon: _endNav!,
-            onPressed: _endNavAction,
-          ),
+        if (_endIconButton != null) _endIconButton!,
+        if (_endNavButton != null) _endNavButton!,
       ],
       backgroundColor: _color,
       elevation: _elevation,

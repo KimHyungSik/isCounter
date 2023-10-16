@@ -32,10 +32,10 @@ class AddCounterScreen extends StatelessWidget {
           .build(),
       body: LayoutBuilder(
         builder: (context, constraint) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraint.maxHeight),
-              child: IntrinsicHeight(
+          return CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,26 +74,13 @@ class AddCounterScreen extends StatelessWidget {
                       height: 32,
                     ),
                     const Spacer(),
-                    saveButton(
-                      context,
-                      () {
-                        context.read<AddCounterViewModel>().saveCounter().then(
-                          (value) {
-                            if (value) {
-                              Navigator.pop(context);
-                            }
-                          },
-                        );
-                      },
-                      Localize.save,
-                    ),
                     const SizedBox(
                       height: 24,
                     )
                   ],
                 ),
               ),
-            ),
+            ],
           );
         },
       ),

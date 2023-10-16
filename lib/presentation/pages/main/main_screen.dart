@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:is_counter/common/counter_icon.dart';
 import 'package:is_counter/common/localization.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/presentation/appbar/app_bar.dart';
@@ -12,6 +13,7 @@ import 'package:is_counter/route/navigators/counter_navigator.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:tuple/tuple.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../addcounter/add_counter_viewmodel.dart';
 import 'main_viewmodel.dart';
@@ -23,8 +25,14 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarBuilder()
+          .setLeading(
+            SvgPicture.asset(CounterIcon.delete.url),
+            () {
+              context.read<MainViewModel>().changeMode();
+            },
+          )
           .setEndIcon(
-            const Icon(Icons.add),
+            SvgPicture.asset(CounterIcon.add.url),
             () {
               final args = AddCounterViewModelArgs(
                 (context.read<MainViewModel>().counterList.list.length + 1)
@@ -32,12 +40,6 @@ class MainScreen extends StatelessWidget {
               );
               AddCounterNav.pushNamed(context, args,
                   (_) => context.read<MainViewModel>().getCounterList());
-            },
-          )
-          .setEndNav(
-            const Icon(Icons.more_horiz),
-            () {
-              context.read<MainViewModel>().changeMode();
             },
           )
           .setTitle(
