@@ -21,11 +21,17 @@ class AppBarBuilder {
     Widget icon,
     Function() action, {
     Color highlightColor = Colors.transparent,
+    Color focusColor = Colors.transparent,
+    Color hoverColor = Colors.transparent,
+    Color splashColor = Colors.transparent,
   }) {
     _endIconButton = IconButton(
       onPressed: action,
       icon: icon,
       highlightColor: highlightColor,
+      focusColor: focusColor,
+      hoverColor: hoverColor,
+      splashColor: splashColor,
     );
     return this;
   }
@@ -34,11 +40,17 @@ class AppBarBuilder {
     Widget icon,
     Function() action, {
     Color highlightColor = Colors.transparent,
+    Color focusColor = Colors.transparent,
+    Color hoverColor = Colors.transparent,
+    Color splashColor = Colors.transparent,
   }) {
     _endNavButton = IconButton(
       onPressed: action,
       icon: icon,
       highlightColor: highlightColor,
+      focusColor: focusColor,
+      hoverColor: hoverColor,
+      splashColor: splashColor,
     );
     return this;
   }
@@ -57,11 +69,17 @@ class AppBarBuilder {
     Widget icon,
     Function() action, {
     Color highlightColor = Colors.transparent,
+    Color focusColor = Colors.transparent,
+    Color hoverColor = Colors.transparent,
+    Color splashColor = Colors.transparent,
   }) {
     _leadingIconButton = IconButton(
       onPressed: action,
       icon: icon,
       highlightColor: highlightColor,
+      focusColor: focusColor,
+      hoverColor: hoverColor,
+      splashColor: splashColor,
     );
     return this;
   }
