@@ -54,6 +54,7 @@ class MainScreen extends StatelessWidget {
         builder: (context, data, child) {
           final viewModel = context.read<MainViewModel>();
           return ListView.builder(
+            padding: const EdgeInsets.only(top: 26, bottom: 40),
             itemCount: viewModel.counterList.list.length,
             itemBuilder: ((context, index) {
               final counter = viewModel.counterList.list[index];
