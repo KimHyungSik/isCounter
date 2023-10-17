@@ -30,9 +30,9 @@ class AddCounterScreen extends StatelessWidget {
             string(Localize.addCounterTitle),
           )
           .build(),
-      body: LayoutBuilder(
-        builder: (context, constraint) {
-          return CustomScrollView(
+      body: Stack(
+        children: [
+          CustomScrollView(
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,
@@ -71,18 +71,27 @@ class AddCounterScreen extends StatelessWidget {
                           context.read<AddCounterViewModel>().setVibration,
                     ),
                     const SizedBox(
-                      height: 32,
+                      height: 52,
                     ),
-                    const Spacer(),
-                    const SizedBox(
-                      height: 24,
-                    )
                   ],
                 ),
               ),
             ],
-          );
-        },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: saveButton(context, () {
+                  Navigator.pop(context);
+                  _showMethodBottomSheet(context);
+                }, Localize.next),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

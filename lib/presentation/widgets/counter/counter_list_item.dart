@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:is_counter/common/counter_icon.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/database/model/tags/tags.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
@@ -59,7 +61,7 @@ class CounterListItem extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.remove),
+                      icon: SvgPicture.asset(CounterIcon.minus.url),
                       onPressed: () => decrementValue(),
                     ),
                     const Spacer(),
@@ -71,7 +73,7 @@ class CounterListItem extends StatelessWidget {
                     ),
                     const Spacer(),
                     IconButton(
-                      icon: const Icon(Icons.add),
+                      icon: SvgPicture.asset(CounterIcon.plus.url),
                       onPressed: () => incrementValue(),
                     ),
                   ],
