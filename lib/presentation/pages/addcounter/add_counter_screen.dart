@@ -6,6 +6,7 @@ import 'package:is_counter/presentation/appbar/app_bar.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_checkbox.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_itme_description.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_save_button.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_tag_grid_list.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_text_field.dart';
 import 'package:is_counter/presentation/widgets/method_radio.dart';
 import 'package:is_counter/theme/colors.dart';
@@ -84,16 +85,20 @@ class AddCounterScreen extends StatelessWidget {
               color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: saveButton(context, () {
-                  context
-                      .read<AddCounterViewModel>()
-                      .saveCounter()
-                      .then((value) {
-                    if (value) {
-                      Navigator.pop(context);
-                    }
-                  });
-                }, Localize.next),
+                child: saveButton(
+                  context,
+                  () {
+                    context
+                        .read<AddCounterViewModel>()
+                        .saveCounter()
+                        .then((value) {
+                      if (value) {
+                        Navigator.pop(context);
+                      }
+                    });
+                  },
+                  Localize.next,
+                ),
               ),
             ),
           ),
@@ -141,45 +146,12 @@ class AddCounterScreen extends StatelessWidget {
           counterItemDescription(
             string(Localize.counterIcon),
           ),
-          SizedBox(
-            height: 150,
-            child: GridView.count(
-              crossAxisCount: 6,
-              mainAxisSpacing: 6,
-              crossAxisSpacing: 6,
-              children: List.generate(
-                CounterTags.values.length,
-                (index) => GestureDetector(
-                  onTap: () {
-                    context.read<AddCounterViewModel>().updateTags(
-                          CounterTags.values[index].name,
-                        );
-                  },
-                  child: Selector<AddCounterViewModel, bool>(
-                      selector: (context, viewModel) =>
-                          viewModel.tag == CounterTags.values[index].name,
-                      builder: (context, isSelected, __) {
-                        final backgroundColor = isSelected
-                            ? darkGray
-                            : lightContainerBackgroundColor;
-                        final iconColor = isSelected ? Colors.white : gray;
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8),
-                            ),
-                            color: backgroundColor,
-                          ),
-                          width: 30,
-                          height: 30,
-                          child: Icon(
-                            CounterTags.values[index].icon,
-                            color: iconColor,
-                          ),
-                        );
-                      }),
-                ),
-              ),
+          Selector<AddCounterViewModel, String?>(
+            selector: (context, viewModel) => viewModel.tag,
+            builder: (context, selectedTag, _) => tagsGridView(
+              context,
+              selectedTag,
+              (value) => context.read<AddCounterViewModel>().updateTags(value),
             ),
           )
         ],
@@ -240,10 +212,20 @@ class AddCounterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                saveButton(context, () {
-                  Navigator.pop(context);
-                  _showMethodBottomSheet(context);
-                }, Localize.next),
+                saveButton(
+                  context,
+                  () {
+                    context
+                        .read<AddCounterViewModel>()
+                        .saveCounter()
+                        .then((value) {
+                      if (value) {
+                        Navigator.pop(context);
+                      }
+                    });
+                  },
+                  Localize.next,
+                ),
                 const SizedBox(
                   height: 16,
                 )
@@ -287,6 +269,50 @@ class AddCounterScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   Localize.save,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Future _showTagsBottomSheet(
+    BuildContext context,
+  ) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bottomSHeetContext) {
+        return StatefulBuilder(
+          builder: (BuildContext conetxt, StateSetter setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 16,
+                ),
+                tagsGridView(
+                  context,
+                  context.read<AddCounterViewModel>().tag,
+                  (value) =>
+                      context.read<AddCounterViewModel>().updateTags(value),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                saveButton(
+                  context,
+                  () {
+                    Navigator.pop(context);
+                    _showMethodBottomSheet(context);
+                  },
+                  Localize.next,
                 ),
                 const SizedBox(
                   height: 16,
