@@ -85,8 +85,14 @@ class AddCounterScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: saveButton(context, () {
-                  Navigator.pop(context);
-                  _showMethodBottomSheet(context);
+                  context
+                      .read<AddCounterViewModel>()
+                      .saveCounter()
+                      .then((value) {
+                    if (value) {
+                      Navigator.pop(context);
+                    }
+                  });
                 }, Localize.next),
               ),
             ),
@@ -115,8 +121,7 @@ class AddCounterScreen extends StatelessWidget {
             focusNode: fieldTitle,
             controllerTitle: viewModel.title,
             onChanged: (value) => viewModel.setTitle(value),
-            onSubmitted: (_) =>
-                FocusScope.of(context).requestFocus(fieldStartPoint),
+            onSubmitted: (_) => _showColorPickerBottomSheet(context),
           ),
           const SizedBox(
             height: 20,
