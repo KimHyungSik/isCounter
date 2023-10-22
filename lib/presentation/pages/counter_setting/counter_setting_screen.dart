@@ -18,108 +18,120 @@ class CounterSettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode fieldTitle = FocusNode();
     final viewModel = context.read<CounterSettingViewModel>();
     return Scaffold(
       appBar: AppBarBuilder()
           .setTitle(context.read<CounterSettingViewModel>().title)
           .build(),
-      body: LayoutBuilder(
-        builder: (context, constraint) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraint.maxHeight),
-              child: IntrinsicHeight(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        counterItemDescription(
-                          string(Localize.addCounterTitleDescription),
-                        ),
-                        counterTextField(
-                          context,
-                          controllerTitle: viewModel.counter.title,
-                          onChanged: viewModel.setTitle,
-                        ),
-                        counterItemDescription(
-                          string(Localize.addCounterColorText),
-                        ),
-                        ColorPicker(
-                          selected:
-                              context.select<CounterSettingViewModel, int>(
-                            (viewModel) => viewModel.counter.color,
+      body: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          counterItemDescription(
+                            string(Localize.addCounterTitleDescription),
                           ),
-                          onClick: (value) {
-                            viewModel.selectColor(value);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        counterItemDescription(
-                          string(Localize.counterIcon),
-                        ),
-                        Selector<CounterSettingViewModel, String?>(
-                          selector: (context, viewModel) => viewModel.tag,
-                          builder: (context, selectedTag, _) => tagsGridView(
+                          counterTextField(
                             context,
-                            selectedTag,
-                            (value) => context
-                                .read<CounterSettingViewModel>()
-                                .updateTags(value),
+                            focusNode: fieldTitle,
+                            controllerTitle: viewModel.counter.title,
+                            onChanged: (value) => viewModel.setTitle(value),
                           ),
-                        )
-                      ],
+                          counterItemDescription(
+                            string(Localize.addCounterColorText),
+                          ),
+                          ColorPicker(
+                            selected:
+                                context.select<CounterSettingViewModel, int>(
+                              (viewModel) => viewModel.counter.color,
+                            ),
+                            onClick: (value) {
+                              viewModel.selectColor(value);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          counterItemDescription(
+                            string(Localize.counterIcon),
+                          ),
+                          Selector<CounterSettingViewModel, String?>(
+                            selector: (context, viewModel) => viewModel.tag,
+                            builder: (context, selectedTag, _) => tagsGridView(
+                              context,
+                              selectedTag,
+                              (value) => context
+                                  .read<CounterSettingViewModel>()
+                                  .updateTags(value),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  _selectedMethod(
-                    context,
-                    (method) {
-                      context
-                          .read<CounterSettingViewModel>()
-                          .setMethodValue(method);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  counterCheckBox(
-                    context,
-                    string(Localize.counterVibrationSettings),
-                    value: context.select<CounterSettingViewModel, bool>(
-                      (viewModel) => viewModel.vibration,
+                    const SizedBox(
+                      height: 16,
                     ),
-                    onChanged:
-                        context.read<CounterSettingViewModel>().setVibration,
-                  ),
-                  const Spacer(),
-                  saveButton(context, () {
+                    _selectedMethod(
+                      context,
+                      (method) {
+                        context
+                            .read<CounterSettingViewModel>()
+                            .setMethodValue(method);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    counterCheckBox(
+                      context,
+                      string(Localize.counterVibrationSettings),
+                      value: context.select<CounterSettingViewModel, bool>(
+                        (viewModel) => viewModel.vibration,
+                      ),
+                      onChanged:
+                          context.read<CounterSettingViewModel>().setVibration,
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: saveButton(
+                  context,
+                  () {
                     context.read<CounterSettingViewModel>().saveCounter(
                       () {
                         Navigator.pop(context, viewModel.counter);
                       },
                     );
-                  }, Localize.save),
-                  const SizedBox(
-                    height: 24,
-                  )
-                ],
-              )),
+                  },
+                  Localize.save,
+                ),
+              ),
             ),
-          );
-        },
+          )
+        ],
       ),
     );
   }
