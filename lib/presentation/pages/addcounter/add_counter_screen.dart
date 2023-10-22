@@ -139,6 +139,8 @@ class AddCounterScreen extends StatelessWidget {
             (select) {
               context.read<AddCounterViewModel>().selectColor(select);
             },
+            context.select<AddCounterViewModel, int>(
+                (value) => value.selectedColor),
           ),
           const SizedBox(
             height: 20,
@@ -173,10 +175,10 @@ class AddCounterScreen extends StatelessWidget {
   Widget _selectedColor(
     BuildContext context,
     Function(int) onClick,
+    int selectedColor,
   ) {
     return ColorPicker(
-      selected: context
-          .select<AddCounterViewModel, int>((value) => value.selectedColor),
+      selected: selectedColor,
       onClick: (select) => onClick(select),
     );
   }
@@ -188,7 +190,7 @@ class AddCounterScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext bottomSheetContext) {
         return StatefulBuilder(
-          builder: (BuildContext conetxt, StateSetter setState) {
+          builder: (BuildContext _, StateSetter setState) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -207,6 +209,7 @@ class AddCounterScreen extends StatelessWidget {
                       context.read<AddCounterViewModel>().selectColor(select);
                       setState(() => {});
                     },
+                    context.read<AddCounterViewModel>().selectedColor,
                   ),
                 ),
                 const SizedBox(
