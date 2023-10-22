@@ -8,6 +8,7 @@ import 'package:is_counter/presentation/widgets/color_picker.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_checkbox.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_itme_description.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_save_button.dart';
+import 'package:is_counter/presentation/widgets/counter/counter_tag_grid_list.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_text_field.dart';
 import 'package:is_counter/presentation/widgets/method_radio.dart';
 import 'package:provider/provider.dart';
@@ -61,6 +62,22 @@ class CounterSettingScreen extends StatelessWidget {
                             viewModel.selectColor(value);
                           },
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        counterItemDescription(
+                          string(Localize.counterIcon),
+                        ),
+                        Selector<CounterSettingViewModel, String?>(
+                          selector: (context, viewModel) => viewModel.tag,
+                          builder: (context, selectedTag, _) => tagsGridView(
+                            context,
+                            selectedTag,
+                            (value) => context
+                                .read<CounterSettingViewModel>()
+                                .updateTags(value),
+                          ),
+                        )
                       ],
                     ),
                   ),
