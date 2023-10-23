@@ -24,6 +24,7 @@ class MainViewModel extends ChangeNotifier {
   Future getCounterList() async {
     final counterList = await _counterController.getCounterList();
     state = LoadedState(counterList);
+    _mode = MainMode.COUNTER;
     notifyListeners();
   }
 
