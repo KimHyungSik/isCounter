@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:is_counter/common/style/TextStyle.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
+import 'package:is_counter/database/model/tags/tags.dart';
 import 'package:is_counter/presentation/widgets/color_picker.dart';
 import 'package:is_counter/presentation/pages/main/main_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +18,6 @@ class CounterListRemoveItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.read<MainViewModel>();
     return ListTile(
       title: Card(
         shape: RoundedRectangleBorder(
@@ -24,53 +25,61 @@ class CounterListRemoveItem extends StatelessWidget {
         ),
         color: counterColors[counter.color],
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IntrinsicWidth(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: TextField(
-                    controller: TextEditingController(
-                      text: counter.title,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (counter.tag != null)
+                    Icon(
+                      CounterTags.nameToIcon(counter.tag!),
+                      size: 20.0,
                     ),
-                    style: const TextStyle(fontSize: 18),
-                    decoration: const InputDecoration(
-                      isDense: true,
-                      contentPadding: EdgeInsets.all(0),
-                      border: InputBorder.none,
-                    ),
-                    maxLines: 1,
-                    onChanged: (value) {
-                      counter.title = value;
-                      viewModel.changeTitle(counter);
-                    },
+                  const SizedBox(
+                    width: 2,
                   ),
-                ),
+                  Text(
+                    counter.title,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 24,
               ),
               Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.delete,
+                  SizedBox(
+                    width: 26,
+                    height: 26,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                      ),
+                      color: Colors.transparent,
+                      onPressed: () => {},
                     ),
-                    color: Colors.transparent,
-                    onPressed: () => {},
                   ),
                   const Spacer(),
                   Consumer<MainViewModel>(
                     builder: (context, viewModel, _) => Text(
                       viewModel.getCounter(counter.id).value.toString(),
-                      style: const TextStyle(fontSize: 18),
+                      style: boldNumberStyle,
                     ),
                   ),
                   const Spacer(),
-                  IconButton(
-                    onPressed: () => removeFun(counter),
-                    icon: const Icon(
-                      Icons.delete,
+                  SizedBox(
+                    width: 26,
+                    height: 26,
+                    child: IconButton(
+                      onPressed: () => removeFun(counter),
+                      icon: const Icon(
+                        Icons.delete,
+                      ),
                     ),
                   )
                 ],
