@@ -53,26 +53,36 @@ class MainScreen extends StatelessWidget {
             Tuple2(viewModel.state, viewModel.mode),
         builder: (context, data, child) {
           final viewModel = context.read<MainViewModel>();
-          return ListView.builder(
-            padding: const EdgeInsets.only(top: 26, bottom: 40),
-            itemCount: viewModel.counterList.list.length,
-            itemBuilder: ((context, index) {
-              final counter = viewModel.counterList.list[index];
-              return counterListView(counter, viewModel, context, data.item2);
-            }),
+          return CustomScrollView(
+            slivers: [
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 24),
+              ),
+              SliverList.builder(
+                itemCount: viewModel.counterList.list.length,
+                itemBuilder: (context, index) {
+                  final counter = viewModel.counterList.list[index];
+                  return counterListView(counter, context, data.item2);
+                },
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 24),
+              ),
+            ],
           );
         },
       ),
     );
   }
 
-  Widget counterListView(Counter counter, MainViewModel viewModel,
-      BuildContext context, MainMode mode) {
+  Widget counterListView(Counter counter, BuildContext context, MainMode mode) {
     if (mode == MainMode.COUNTER) {
       return CounterListItem(
         counter: counter,
-        incrementValue: () => viewModel.incrementValue(counter),
-        decrementValue: () => viewModel.decrementValue(counter),
+        incrementValue: () =>
+            context.read<MainViewModel>().incrementValue(counter),
+        decrementValue: () =>
+            context.read<MainViewModel>().decrementValue(counter),
         navigatorCounterScreen: (Counter counter) {
           CounterNav.pushNamed(
             context,
@@ -83,8 +93,10 @@ class MainScreen extends StatelessWidget {
       );
     } else {
       return CounterListRemoveItem(
+        isSelected: context.read<MainViewModel>().isSelected(counter.id),
         counter: counter,
-        removeFun: (counter) => viewModel.removeCounter(counter),
+        removeFun: (counter) =>
+            context.read<MainViewModel>().selectRemoveItem(counter.id),
       );
     }
   }

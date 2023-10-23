@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:is_counter/database/controller/counter_controller.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/database/model/counter/counter_list.dart';
+import 'package:is_counter/presentation/common/set_extension.dart';
 import 'package:is_counter/presentation/pages/main/state/main_mode.dart';
 import 'package:is_counter/presentation/pages/main/state/main_state.dart';
 
@@ -13,6 +14,7 @@ class MainViewModel extends ChangeNotifier {
   MainState state = LoadingState();
   MainMode _mode = MainMode.COUNTER;
   MainMode get mode => _mode;
+  Set<String> _selectedRemoveItem = {};
 
   MainViewModel() {
     getCounterList();
@@ -58,4 +60,15 @@ class MainViewModel extends ChangeNotifier {
     _counterController.modifyCounter(counterList, counter);
     notifyListeners();
   }
+
+  void resetSelectedRemoveItem() {
+    _selectedRemoveItem = {};
+  }
+
+  void selectRemoveItem(String id) {
+    _selectedRemoveItem.toggleItemInSet(id);
+    notifyListeners();
+  }
+
+  bool isSelected(String id) => _selectedRemoveItem.contains(id);
 }
