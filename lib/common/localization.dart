@@ -16,6 +16,7 @@ enum Localize {
   bottomSheetConfirm("bottom_sheet_confirm"),
   counterVibrationSettings("counter_vibration_settings"),
   counterIcon("counter_icon"),
+  counterRemove("counter_remove"),
   save("save"),
   next("next");
 
