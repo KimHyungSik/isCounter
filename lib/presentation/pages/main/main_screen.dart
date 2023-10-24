@@ -48,30 +48,77 @@ class MainScreen extends StatelessWidget {
             ),
           )
           .build(),
-      body: Selector<MainViewModel, Tuple2<MainState, MainMode>>(
-        selector: (context, viewModel) =>
-            Tuple2(viewModel.state, viewModel.mode),
-        builder: (context, data, child) {
-          final viewModel = context.read<MainViewModel>();
-          return CustomScrollView(
-            slivers: [
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 24),
-              ),
-              SliverList.builder(
-                itemCount: viewModel.counterList.list.length,
-                itemBuilder: (context, index) {
-                  final counter = viewModel.counterList.list[index];
-                  return counterListView(counter, context, data.item2);
-                },
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 24),
-              ),
-            ],
-          );
-        },
+      body: Stack(
+        children: [
+          Selector<MainViewModel, Tuple2<MainState, MainMode>>(
+            selector: (context, viewModel) =>
+                Tuple2(viewModel.state, viewModel.mode),
+            builder: (context, data, child) {
+              final viewModel = context.read<MainViewModel>();
+              return CustomScrollView(
+                slivers: [
+                  const SliverToBoxAdapter(
+                    child: SizedBox(height: 24),
+                  ),
+                  SliverList.builder(
+                    itemCount: viewModel.counterList.list.length,
+                    itemBuilder: (context, index) {
+                      final counter = viewModel.counterList.list[index];
+                      return counterListView(counter, context, data.item2);
+                    },
+                  ),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(height: 24),
+                  ),
+                ],
+              );
+            },
+          ),
+          removeButton(context),
+        ],
       ),
+    );
+  }
+
+  Align removeButton(BuildContext context) {
+    return Align(
+      alignment: AlignmentDirectional.bottomCenter,
+      child: context.select<MainViewModel, bool>(
+        (viewModel) => viewModel.selectedRemoveItem.isNotEmpty,
+      )
+          ? Padding(
+              padding: const EdgeInsets.only(
+                top: 8,
+                bottom: 30,
+                left: 24,
+                right: 24,
+              ),
+              child: TextButton(
+                onPressed: () =>
+                    context.read<MainViewModel>().removeSelectedCounter(),
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                ),
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        string(Localize.counterRemove),
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          : null,
     );
   }
 
