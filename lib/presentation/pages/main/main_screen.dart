@@ -50,37 +50,40 @@ class MainScreen extends StatelessWidget {
           .build(),
       body: Stack(
         children: [
-          Selector<MainViewModel, Tuple2<MainState, MainMode>>(
-            selector: (context, viewModel) =>
-                Tuple2(viewModel.state, viewModel.mode),
-            builder: (context, data, child) {
-              final viewModel = context.read<MainViewModel>();
-              return CustomScrollView(
-                slivers: [
-                  const SliverToBoxAdapter(
-                    child: SizedBox(height: 24),
-                  ),
-                  SliverList.builder(
-                    itemCount: viewModel.counterList.list.length,
-                    itemBuilder: (context, index) {
-                      final counter = viewModel.counterList.list[index];
-                      return counterListView(counter, context, data.item2);
-                    },
-                  ),
-                  const SliverToBoxAdapter(
-                    child: SizedBox(height: 24),
-                  ),
-                ],
-              );
-            },
-          ),
-          removeButton(context),
+          _mainScrollView(),
+          _removeButton(context),
         ],
       ),
     );
   }
 
-  Align removeButton(BuildContext context) {
+  Selector<MainViewModel, Tuple2<MainState, MainMode>> _mainScrollView() {
+    return Selector<MainViewModel, Tuple2<MainState, MainMode>>(
+      selector: (context, viewModel) => Tuple2(viewModel.state, viewModel.mode),
+      builder: (context, data, child) {
+        final viewModel = context.read<MainViewModel>();
+        return CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(
+              child: SizedBox(height: 24),
+            ),
+            SliverList.builder(
+              itemCount: viewModel.counterList.list.length,
+              itemBuilder: (context, index) {
+                final counter = viewModel.counterList.list[index];
+                return counterListView(counter, context, data.item2);
+              },
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(height: 24),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Align _removeButton(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional.bottomCenter,
       child: context.select<MainViewModel, bool>(
