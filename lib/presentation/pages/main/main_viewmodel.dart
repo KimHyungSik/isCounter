@@ -45,9 +45,11 @@ class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future removeCounter(Counter counter) async {
-    final newCounterList =
-        await _counterController.removeCounter(counterList, counter);
+  Future removeSelectedCounter() async {
+    final newCounterList = await _counterController.removeCounterIds(
+      counterList,
+      _selectedRemoveItem,
+    );
     state = LoadedState(newCounterList);
     notifyListeners();
   }
