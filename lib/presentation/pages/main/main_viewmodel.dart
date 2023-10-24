@@ -15,6 +15,7 @@ class MainViewModel extends ChangeNotifier {
   MainMode _mode = MainMode.COUNTER;
   MainMode get mode => _mode;
   Set<String> _selectedRemoveItem = {};
+  Set<String> get selectedRemoveItem => _selectedRemoveItem;
 
   MainViewModel() {
     getCounterList();

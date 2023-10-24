@@ -93,7 +93,6 @@ class MainScreen extends StatelessWidget {
       );
     } else {
       return CounterListRemoveItem(
-        isSelected: context.read<MainViewModel>().isSelected(counter.id),
         counter: counter,
         removeFun: (counter) =>
             context.read<MainViewModel>().selectRemoveItem(counter.id),
