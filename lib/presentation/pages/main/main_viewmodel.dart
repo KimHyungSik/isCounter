@@ -51,6 +51,8 @@ class MainViewModel extends ChangeNotifier {
       _selectedRemoveItem,
     );
     state = LoadedState(newCounterList);
+    _selectedRemoveItem = {};
+    _mode = MainMode.COUNTER;
     notifyListeners();
   }
 
@@ -66,6 +68,7 @@ class MainViewModel extends ChangeNotifier {
 
   void resetSelectedRemoveItem() {
     _selectedRemoveItem = {};
+    notifyListeners();
   }
 
   void selectRemoveItem(String id) {
