@@ -73,6 +73,20 @@ class CounterController {
     return await setCounterList(counterList);
   }
 
+  Future<CounterList> removeCounterIds(
+    CounterList? cacheCounterList,
+    Set<String> ids,
+  ) async {
+    CounterList counterList = await _checkCacheCounterList(cacheCounterList);
+    for (final id in ids) {
+      final targetIndex =
+          counterList.list.indexWhere((counter) => counter.id == id);
+      counterList.list.removeAt(targetIndex);
+    }
+
+    return await setCounterList(counterList);
+  }
+
   Future<CounterList> _checkCacheCounterList(
       CounterList? cacheCounterList) async {
     CounterList counterList;
