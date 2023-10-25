@@ -28,6 +28,7 @@ class MainViewModel extends ChangeNotifier {
     final counterList = await _counterController.getCounterList();
     state = LoadedState(counterList);
     _mode = MainMode.COUNTER;
+    _selectedRemoveItem = {};
     notifyListeners();
   }
 
