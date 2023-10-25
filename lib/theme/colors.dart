@@ -16,3 +16,4 @@ const darkContainerBackgroundColor = Color(0xfff8f8f8);
 
 const darkGray = Color(0xff222222);
 const gray = Color(0xff444444);
+const lightGray = Color(0xffCCCCCC);

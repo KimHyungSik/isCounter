@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:is_counter/common/counter_icon.dart';
 import 'package:is_counter/common/localization.dart';
@@ -10,6 +12,7 @@ import 'package:is_counter/presentation/widgets/counter/counter_list_item.dart';
 import 'package:is_counter/presentation/widgets/counter/counter_list_remove.dart';
 import 'package:is_counter/route/navigators/add_counter_navigator.dart';
 import 'package:is_counter/route/navigators/counter_navigator.dart';
+import 'package:is_counter/theme/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:tuple/tuple.dart';
@@ -51,7 +54,7 @@ class MainScreen extends StatelessWidget {
       body: Stack(
         children: [
           _mainScrollView(),
-          _removeButton(context),
+          _removeButton(context) ?? Container(),
         ],
       ),
     );
@@ -83,13 +86,17 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Align _removeButton(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional.bottomCenter,
-      child: context.select<MainViewModel, bool>(
-        (viewModel) => viewModel.selectedRemoveItem.isNotEmpty,
-      )
-          ? Padding(
+  Widget? _removeButton(BuildContext context) {
+    final hasSeletedItem = context.select<MainViewModel, bool>(
+      (viewModel) => viewModel.selectedRemoveItem.isNotEmpty,
+    );
+    final isRemoveMode = context.select<MainViewModel, bool>(
+      (viewModel) => viewModel.mode == MainMode.REMOVE,
+    );
+    return isRemoveMode
+        ? Align(
+            alignment: AlignmentDirectional.bottomCenter,
+            child: Padding(
               padding: const EdgeInsets.only(
                 top: 8,
                 bottom: 30,
@@ -97,8 +104,9 @@ class MainScreen extends StatelessWidget {
                 right: 24,
               ),
               child: TextButton(
-                onPressed: () =>
-                    context.read<MainViewModel>().removeSelectedCounter(),
+                onPressed: () => hasSeletedItem
+                    ? context.read<MainViewModel>().removeSelectedCounter()
+                    : null,
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
                 ),
@@ -107,7 +115,9 @@ class MainScreen extends StatelessWidget {
                   width: double.infinity,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: hasSeletedItem
+                          ? Theme.of(context).primaryColor
+                          : lightGray,
                       borderRadius: BorderRadius.circular(8)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -120,9 +130,9 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            )
-          : null,
-    );
+            ),
+          )
+        : null;
   }
 
   Widget counterListView(Counter counter, BuildContext context, MainMode mode) {
