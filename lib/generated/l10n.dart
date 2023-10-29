@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `삭제하기`
+  String get counter_remove {
+    return Intl.message(
+      '삭제하기',
+      name: 'counter_remove',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `카운터 아이콘`
   String get counter_icon {
     return Intl.message(
