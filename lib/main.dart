@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:is_counter/route/route.dart' as route;
 import 'package:is_counter/theme/colors.dart';
 
 import 'generated/l10n.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }

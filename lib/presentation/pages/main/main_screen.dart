@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:is_counter/common/counter_icon.dart';
 import 'package:is_counter/common/localization.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
@@ -26,6 +27,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<MainViewModel>().initBannerAd();
     return Scaffold(
       appBar: AppBarBuilder()
           .setLeading(
@@ -55,6 +57,23 @@ class MainScreen extends StatelessWidget {
         children: [
           _mainScrollView(),
           _removeButton(context) ?? Container(),
+          Selector<MainViewModel, BannerAd?>(
+            selector: (context, viewModel) => viewModel.banner,
+            builder: (context, ad, _) {
+              if (ad == null) {
+                return Container();
+              } else {
+                return Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    width: ad.size.width.toDouble(),
+                    height: ad.size.height.toDouble(),
+                    child: AdWidget(ad: ad),
+                  ),
+                );
+              }
+            },
+          )
         ],
       ),
     );

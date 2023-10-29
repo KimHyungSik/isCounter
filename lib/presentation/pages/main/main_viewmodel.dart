@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:is_counter/common/ads/ad_helper.dart';
 import 'package:is_counter/database/controller/counter_controller.dart';
 import 'package:is_counter/database/model/counter/counter.dart';
 import 'package:is_counter/database/model/counter/counter_list.dart';
@@ -16,6 +18,7 @@ class MainViewModel extends ChangeNotifier {
   MainMode get mode => _mode;
   Set<String> _selectedRemoveItem = {};
   Set<String> get selectedRemoveItem => _selectedRemoveItem;
+  BannerAd? banner;
 
   MainViewModel() {
     getCounterList();
@@ -78,4 +81,22 @@ class MainViewModel extends ChangeNotifier {
   }
 
   bool isSelected(String id) => _selectedRemoveItem.contains(id);
+
+  void initBannerAd() {
+    BannerAd(
+      size: AdSize.banner,
+      adUnitId: AdHelper.bannerAdUnitId,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          banner = ad as BannerAd;
+          notifyListeners();
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        },
+      ),
+      request: AdRequest(),
+    ).load();
+  }
 }
