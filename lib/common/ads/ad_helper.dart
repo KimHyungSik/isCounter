@@ -5,7 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AdHelper {
   static String get bannerAdUnitId {
-    final isDebug = kDebugMode;
+    const isDebug = kDebugMode;
     try {
       if (Platform.isAndroid) {
         return isDebug
